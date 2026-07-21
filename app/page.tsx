@@ -2,11 +2,13 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import {
   CtaBand,
+  GuaranteeBand,
   PageFrame,
   ProofStrip,
   QuoteCard,
   SectionHeading,
   SiteHeader,
+  StudioStory,
   Testimonials,
   differentiators,
   faqs,
@@ -68,19 +70,19 @@ function HomeHero() {
           </p>
           <div className="accent-rule mt-3 sm:mt-4" />
           <h1 className="anim-rise anim-rise-delay-1 mt-3 font-display text-[clamp(1.15rem,2.8vw,2.25rem)] font-semibold leading-snug tracking-tight text-white/95 sm:mt-4">
-            Accurate human transcription you can publish.
+            Publish-ready transcripts in 24–72 hours—human-reviewed.
           </h1>
           <p className="anim-rise anim-rise-delay-2 mt-2 max-w-md text-[0.9rem] leading-relaxed text-white/65 sm:mt-4 sm:text-base md:text-lg">
-            Convert audio and video into clear, speaker-labeled text—with the
-            care automated tools miss.
+            A boutique studio for creators, researchers, and professionals who
+            need clear, speaker-labeled text—not a ticket queue.
           </p>
           <div className="anim-rise anim-rise-delay-3 mt-5 flex flex-wrap gap-3 sm:mt-7">
             <Link href="/contact" className="btn-primary px-5 py-2.5 text-sm sm:px-6 sm:py-3.5">
               Get a free quote
               <ArrowRight className="btn-arrow size-4" aria-hidden />
             </Link>
-            <Link href="/pricing" className="btn-secondary px-5 py-2.5 text-sm sm:px-6 sm:py-3.5">
-              See pricing
+            <Link href="/sample" className="btn-secondary px-5 py-2.5 text-sm sm:px-6 sm:py-3.5">
+              See a sample
             </Link>
           </div>
         </div>
@@ -237,7 +239,10 @@ export default function Home() {
             {steps.map((step) => {
               const Icon = step.icon;
               return (
-                <li key={step.num} className="card-lift group p-2">
+                <li
+                  key={step.num}
+                  className="card-lift group border border-[var(--line)] bg-paper/80 p-6 sm:p-8"
+                >
                   <div className="flex items-center gap-3">
                     <span className="icon-badge">
                       <Icon className="size-5" aria-hidden />
@@ -259,6 +264,10 @@ export default function Home() {
         </div>
       </section>
 
+      <StudioStory />
+
+      <GuaranteeBand />
+
       <section className="px-5 py-24 sm:px-8 sm:py-32">
         <div className="mx-auto max-w-6xl">
           <SectionHeading
@@ -271,6 +280,8 @@ export default function Home() {
         </div>
       </section>
 
+      <CtaBand />
+
       <section className="px-5 py-24 sm:px-8 sm:py-32">
         <div className="mx-auto max-w-6xl">
           <SectionHeading
@@ -278,7 +289,7 @@ export default function Home() {
             title="Quick answers before you send a file."
           />
           <div className="mt-12 divide-y divide-[var(--line)] border-y border-[var(--line)]">
-            {faqs.slice(0, 4).map((item) => (
+            {faqs.slice(0, 5).map((item) => (
               <details key={item.q} className="group py-6">
                 <summary className="cursor-pointer font-display text-lg font-semibold text-ink">
                   <span className="flex items-center justify-between gap-4">
@@ -300,8 +311,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      <CtaBand />
     </PageFrame>
   );
 }

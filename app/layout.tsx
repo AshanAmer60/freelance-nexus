@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     template: "%s",
   },
   description:
-    "Freelance Nexus turns speech into clean, accurate transcripts for podcasts, interviews, legal work, and research.",
+    "Publish-ready transcripts in 24–72 hours—human-reviewed. Boutique transcription, translation, and recording support from Freelance Nexus.",
   icons: {
     icon: [{ url: "/logo.jpeg", type: "image/jpeg" }],
     shortcut: "/logo.jpeg",

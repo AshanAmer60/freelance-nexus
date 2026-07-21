@@ -22,6 +22,8 @@ import {
   Stethoscope,
   Target,
   Upload,
+  MapPin,
+  Mail,
 } from "lucide-react";
 import { SiteLogo, navLinks } from "./brand";
 import { MobileNav } from "./mobile-nav";
@@ -215,23 +217,49 @@ export const differentiators: {
 export const testimonials = [
   {
     quote:
-      "The transcript arrived clean, labeled, and ready to publish. We barely needed to edit.",
+      "We sent a 90-minute interview with heavy jargon. The transcript came back labeled, clean-read, and ready to publish the same week—almost no cleanup.",
     name: "Sara M.",
     role: "Podcast producer",
   },
   {
     quote:
-      "They handled specialized terms carefully and met a tight deadline without cutting corners.",
+      "Our research team needed accurate speaker turns under a hard deadline. Freelance Nexus asked the right scoping questions and delivered usable text on time.",
     name: "Daniel R.",
-    role: "Research lead",
+    role: "Qualitative research lead",
   },
   {
     quote:
-      "Clear communication, confidential handling, and a finished transcript we could trust.",
+      "Confidential handling and clear communication mattered as much as accuracy. The finished transcript was organized enough to cite immediately.",
     name: "Ayesha K.",
-    role: "Legal operations",
+    role: "Legal operations coordinator",
   },
 ];
+
+export const guarantees = [
+  {
+    title: "Human-reviewed before delivery",
+    copy: "Every transcript is checked for speakers, terminology, and structure—not left as a raw machine export.",
+  },
+  {
+    title: "Scoped before we start",
+    copy: "We confirm style, format, speakers, and deadline up front so pricing and turnaround stay clear.",
+  },
+  {
+    title: "Revision if we miss the brief",
+    copy: "If delivery doesn’t match the agreed style or labeling scope, we revise it.",
+  },
+];
+
+export const studioStory = {
+  eyebrow: "The studio",
+  title: "Not a ticket queue. A transcription studio.",
+  copy: "Freelance Nexus is built for clients who want direct communication and finished text they can actually use—publish, cite, file, or share. Based near Adyala Road, RWP, we work with creators, researchers, and professionals locally and online.",
+  points: [
+    "Boutique handling instead of mass-upload anonymity",
+    "Transcription, translation, and recording support under one mark",
+    "Delivery shaped for the next task—not just word capture",
+  ],
+};
 
 export const faqs = [
   {
@@ -263,6 +291,10 @@ export const faqs = [
     a: "Yes. Files are handled discreetly. We can work under NDA for sensitive legal, medical, research, or business material.",
   },
   {
+    q: "Do you offer a revision guarantee?",
+    a: "Yes. If the delivered transcript doesn’t match the agreed style, speaker labeling, or formatting scope, we revise it. Accuracy still depends on audio clarity—difficult recordings are scoped honestly before work begins.",
+  },
+  {
     q: "Do you offer translation as well?",
     a: "Yes. Translation is part of our service suite alongside transcription and recording support—ask for a combined quote when needed.",
   },
@@ -270,6 +302,7 @@ export const faqs = [
 
 export const sampleTranscript = `Freelance Nexus — Sample Transcript
 Style: Clean-read | Speakers: 2 | Timestamps: yes
+Service: Human-reviewed transcription
 
 [00:00:12] Interviewer:
 Thanks for joining us today. To start, what made accuracy so important in your last project?
@@ -283,7 +316,28 @@ And how did the final delivery help your team?
 [00:00:44] Guest:
 It saved hours. The formatting was clear, the labels were consistent, and we could pull quotes immediately.
 
-— End of excerpt —`;
+[00:01:02] Interviewer:
+Would you recommend a boutique transcription studio over a large upload platform?
+
+[00:01:09] Guest:
+For work that matters, yes. Direct communication and a human review pass made a noticeable difference in the finished file.
+
+— End of sample —`;
+
+export function DownloadSampleLink({
+  className = "btn-primary px-6 py-3 text-sm",
+  label = "Download sample (.txt)",
+}: {
+  className?: string;
+  label?: string;
+}) {
+  return (
+    <a href="/sample-transcript.txt" download className={className}>
+      {label}
+      <ArrowRight className="btn-arrow size-4" aria-hidden />
+    </a>
+  );
+}
 
 export function SiteHeader({ dark = false }: { dark?: boolean }) {
   const textClass = dark
@@ -329,57 +383,128 @@ export function SiteHeader({ dark = false }: { dark?: boolean }) {
 }
 
 export function SiteFooter() {
+  const year = new Date().getFullYear();
+
   return (
-    <footer className="border-t border-[var(--line)] px-5 py-12 sm:px-8">
-      <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-[1.2fr_1fr_1fr]">
-        <div className="group flex items-start gap-3">
-          <SiteLogo size={52} />
+    <footer className="relative w-full overflow-hidden bg-ink text-white">
+      <div
+        className="pointer-events-none absolute -left-24 top-0 h-72 w-72 rounded-full bg-ink-soft/30 blur-3xl"
+        aria-hidden
+      />
+      <div
+        className="pointer-events-none absolute -right-16 bottom-0 h-64 w-64 rounded-full bg-signal/15 blur-3xl"
+        aria-hidden
+      />
+
+      <div className="relative mx-auto max-w-6xl px-5 pt-16 pb-8 sm:px-8 sm:pt-20">
+        <div className="grid gap-12 lg:grid-cols-[1.35fr_1fr_1fr_1.1fr] lg:gap-10">
+          <div className="group max-w-sm">
+            <Link href="/" className="inline-flex items-center gap-3">
+              <SiteLogo size={56} className="ring-1 ring-white/10" />
+              <span className="font-display text-lg font-semibold tracking-tight">
+                Freelance Nexus
+              </span>
+            </Link>
+            <p className="mt-5 text-sm leading-relaxed text-white/60">
+              Human-reviewed transcription, translation, and recording support.
+              Boutique care for work that has to be right.
+            </p>
+            <div className="mt-6 flex items-start gap-2.5 text-sm text-white/55">
+              <MapPin className="mt-0.5 size-4 shrink-0 text-signal" aria-hidden />
+              <span>Adyala Road, RWP</span>
+            </div>
+            <a
+              href="mailto:hello@freelancenexus.com"
+              className="mt-3 inline-flex items-center gap-2.5 text-sm text-white/55 transition-colors duration-500 hover:text-signal"
+            >
+              <Mail className="size-4 shrink-0 text-signal" aria-hidden />
+              hello@freelancenexus.com
+            </a>
+          </div>
+
           <div>
-            <p className="font-display text-sm font-semibold text-ink">
-              Freelance Nexus
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-signal">
+              Explore
             </p>
-            <p className="mt-2 max-w-xs text-sm leading-relaxed text-mute">
-              Human-reviewed transcription, translation, and recording support
-              from Adyala Road, RWP.
-            </p>
+            <div className="mt-5 flex flex-col gap-3 text-sm text-white/65">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="link-arrow w-fit transition-colors duration-500 hover:text-white"
+                >
+                  {link.label}
+                  <ArrowRight className="size-3.5 text-signal/80" aria-hidden />
+                </Link>
+              ))}
+            </div>
           </div>
-        </div>
-        <div>
-          <p className="text-sm font-semibold uppercase tracking-[0.16em] text-ink">
-            Explore
-          </p>
-          <div className="mt-4 flex flex-col gap-2 text-sm text-mute">
-            {navLinks.map((link) => (
+
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-signal">
+              Studio
+            </p>
+            <div className="mt-5 flex flex-col gap-3 text-sm text-white/65">
               <Link
-                key={link.href}
-                href={link.href}
-                className="link-arrow w-fit hover:text-ink"
+                href="/about"
+                className="link-arrow w-fit transition-colors duration-500 hover:text-white"
               >
-                {link.label}
-                <ArrowRight className="size-3.5 opacity-0 transition-opacity duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:opacity-100" />
+                About
+                <ArrowRight className="size-3.5 text-signal/80" aria-hidden />
               </Link>
-            ))}
-            <Link href="/about" className="link-arrow w-fit hover:text-ink">
-              About
-              <ArrowRight className="size-3.5" />
+              <Link
+                href="/sample"
+                className="link-arrow w-fit transition-colors duration-500 hover:text-white"
+              >
+                Sample transcript
+                <ArrowRight className="size-3.5 text-signal/80" aria-hidden />
+              </Link>
+              <Link
+                href="/services"
+                className="link-arrow w-fit transition-colors duration-500 hover:text-white"
+              >
+                Transcription
+                <ArrowRight className="size-3.5 text-signal/80" aria-hidden />
+              </Link>
+              <Link
+                href="/services"
+                className="link-arrow w-fit transition-colors duration-500 hover:text-white"
+              >
+                Translation
+                <ArrowRight className="size-3.5 text-signal/80" aria-hidden />
+              </Link>
+            </div>
+          </div>
+
+          <div className="border border-white/10 bg-white/[0.04] p-6 backdrop-blur-sm">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-signal">
+              Start a project
+            </p>
+            <p className="mt-4 text-sm leading-relaxed text-white/65">
+              Share length, speakers, deadline, and format for a clear quote.
+            </p>
+            <Link href="/contact" className="btn-primary mt-6 w-full px-5 py-3 text-sm">
+              Request a quote
+              <ArrowRight className="btn-arrow size-4" aria-hidden />
             </Link>
-            <Link href="/sample" className="link-arrow w-fit hover:text-ink">
-              Sample transcript
-              <ArrowRight className="size-3.5" />
-            </Link>
+            <a
+              href="/sample-transcript.txt"
+              download
+              className="link-arrow mt-4 text-sm text-white/55 hover:text-signal"
+            >
+              Download sample
+              <ArrowRight className="size-3.5" aria-hidden />
+            </a>
           </div>
         </div>
-        <div>
-          <p className="text-sm font-semibold uppercase tracking-[0.16em] text-ink">
-            Start a project
+
+        <div className="mt-14 flex flex-col gap-4 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-xs text-white/40">
+            © {year} Freelance Nexus. All rights reserved.
           </p>
-          <p className="mt-4 text-sm leading-relaxed text-mute">
-            Tell us your audio length, speakers, deadline, and preferred format.
+          <p className="text-xs tracking-wide text-white/40">
+            Precision transcription for the spoken word.
           </p>
-          <Link href="/contact" className="btn-primary mt-5 px-5 py-2.5 text-sm">
-            Request a quote
-            <ArrowRight className="btn-arrow size-4" aria-hidden />
-          </Link>
         </div>
       </div>
     </footer>
@@ -508,7 +633,7 @@ export function QuoteCard() {
         href="/sample"
         className="link-arrow relative mt-6 text-sm font-medium text-signal hover:text-paper"
       >
-        View full sample
+        View & download sample
         <ArrowRight className="size-4" aria-hidden />
       </Link>
     </div>
@@ -605,6 +730,86 @@ export function FeatureCheck({
   );
 }
 
+export function StudioStory() {
+  return (
+    <section className="px-5 py-24 sm:px-8 sm:py-32">
+      <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+        <div>
+          <SectionHeading
+            eyebrow={studioStory.eyebrow}
+            title={studioStory.title}
+            copy={studioStory.copy}
+          />
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link href="/about" className="btn-primary bg-ink px-6 py-3 text-sm text-paper hover:bg-ink-soft hover:text-paper">
+              Our story
+              <ArrowRight className="btn-arrow size-4" aria-hidden />
+            </Link>
+            <DownloadSampleLink className="link-arrow border border-[var(--line)] bg-paper px-6 py-3 text-sm font-medium text-ink transition hover:border-signal" />
+          </div>
+        </div>
+        <ul className="space-y-4">
+          {studioStory.points.map((point) => (
+            <li
+              key={point}
+              className="card-lift border-l-2 border-signal bg-paper/80 px-5 py-5 text-base leading-relaxed text-ink shadow-[0_12px_40px_rgba(6,40,88,0.04)]"
+            >
+              {point}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  );
+}
+
+export function GuaranteeBand() {
+  return (
+    <section className="px-5 py-24 sm:px-8 sm:py-32">
+      <div className="mx-auto max-w-6xl overflow-hidden border border-[var(--line)] bg-mist/40">
+        <div className="grid gap-0 lg:grid-cols-[0.9fr_1.1fr]">
+          <div className="bg-ink px-8 py-12 text-white sm:px-10 sm:py-14">
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-white/45">
+              Our promise
+            </p>
+            <h2 className="mt-4 font-display text-3xl font-bold tracking-tight sm:text-4xl">
+              Publish-ready transcripts. Human-reviewed before delivery.
+            </h2>
+            <p className="mt-5 text-base leading-relaxed text-white/65">
+              Typical turnaround is 24–72 hours depending on length and
+              complexity. If we miss the agreed brief, we revise.
+            </p>
+            <Link href="/contact" className="btn-primary mt-8 px-6 py-3 text-sm">
+              Get a free quote
+              <ArrowRight className="btn-arrow size-4" aria-hidden />
+            </Link>
+          </div>
+          <div className="grid gap-0 sm:grid-cols-1">
+            {guarantees.map((item) => (
+              <div
+                key={item.title}
+                className="card-lift border-b border-[var(--line)] bg-paper/70 px-8 py-8 last:border-b-0 sm:px-10"
+              >
+                <div className="flex items-start gap-3">
+                  <BadgeCheck className="mt-0.5 size-5 shrink-0 text-ink-soft" aria-hidden />
+                  <div>
+                    <h3 className="font-display text-xl font-semibold text-ink">
+                      {item.title}
+                    </h3>
+                    <p className="mt-2 text-sm leading-relaxed text-mute">
+                      {item.copy}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export function CtaBand({
   title = "Ready when your audio is.",
   copy = "Share length, speakers, deadline, and format. We’ll reply with a clear quote.",
@@ -613,30 +818,31 @@ export function CtaBand({
   copy?: string;
 }) {
   return (
-    <section className="px-5 pb-24 sm:px-8 sm:pb-32">
-      <div className="relative mx-auto max-w-6xl overflow-hidden bg-ink px-6 py-14 text-white sm:px-12 sm:py-20">
-        <div
-          className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-signal/25 blur-3xl soft-pulse"
-          aria-hidden
-        />
-        <div
-          className="pointer-events-none absolute bottom-0 left-0 h-48 w-48 rounded-full bg-ink-soft/40 blur-3xl"
-          aria-hidden
-        />
-        <div className="relative max-w-2xl">
-          <h2 className="font-display text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
-            {title}
-          </h2>
-          <p className="mt-5 text-lg leading-relaxed text-white/65">{copy}</p>
-          <div className="mt-10 flex flex-wrap gap-3">
-            <Link href="/contact" className="btn-primary px-8 py-3.5 text-sm">
-              Request a quote
-              <ArrowRight className="btn-arrow size-4" aria-hidden />
-            </Link>
-            <Link href="/sample" className="btn-secondary px-8 py-3.5 text-sm">
-              See a sample transcript
-            </Link>
-          </div>
+    <section className="relative w-full overflow-hidden bg-ink px-5 py-16 text-white sm:px-8 sm:py-24 lg:py-28">
+      <div
+        className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-signal/25 blur-3xl soft-pulse"
+        aria-hidden
+      />
+      <div
+        className="pointer-events-none absolute bottom-0 left-0 h-48 w-48 rounded-full bg-ink-soft/40 blur-3xl"
+        aria-hidden
+      />
+      <div className="relative mx-auto w-full max-w-6xl">
+        <h2 className="font-display text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
+          {title}
+        </h2>
+        <p className="mt-5 max-w-2xl text-lg leading-relaxed text-white/65">
+          {copy}
+        </p>
+        <div className="mt-10 flex flex-wrap gap-3">
+          <Link href="/contact" className="btn-primary px-8 py-3.5 text-sm">
+            Request a quote
+            <ArrowRight className="btn-arrow size-4" aria-hidden />
+          </Link>
+          <DownloadSampleLink
+            className="btn-secondary px-8 py-3.5 text-sm"
+            label="Download a sample transcript"
+          />
         </div>
       </div>
     </section>
