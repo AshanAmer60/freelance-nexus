@@ -15,14 +15,30 @@ const syne = Syne({
 });
 
 export const metadata: Metadata = {
-  title: "Freelance Nexus — Precision Transcription",
+  title: {
+    default: "Freelance Nexus — Precision Transcription",
+    template: "%s",
+  },
   description:
     "Freelance Nexus turns speech into clean, accurate transcripts for podcasts, interviews, legal work, and research.",
+  icons: {
+    icon: [{ url: "/logo.jpeg", type: "image/jpeg" }],
+    shortcut: "/logo.jpeg",
+    apple: "/logo.jpeg",
+  },
   openGraph: {
     title: "Freelance Nexus — Precision Transcription",
     description:
       "Human-crafted transcription that captures every word, speaker, and nuance.",
     type: "website",
+    images: [
+      {
+        url: "/logo.jpeg",
+        width: 800,
+        height: 800,
+        alt: "Freelance Nexus logo",
+      },
+    ],
   },
 };
 
