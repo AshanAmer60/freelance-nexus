@@ -41,7 +41,7 @@ export default function UseCasesPage() {
                   className="card-lift group relative overflow-hidden border border-[var(--line)] bg-paper/85 p-8 shadow-[0_18px_60px_rgba(6,40,88,0.05)]"
                 >
                   <div className="flex items-start justify-between gap-4">
-                    <span className="font-display text-5xl font-bold text-mist-deep transition group-hover:text-signal/50">
+                    <span className="font-display text-5xl font-bold text-mist-deep transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:text-signal/50">
                       0{index + 1}
                     </span>
                     <span className="icon-badge">

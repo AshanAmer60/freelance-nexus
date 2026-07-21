@@ -54,7 +54,7 @@ export default function ServicesPage() {
                     </span>
                   </div>
                   <div>
-                    <h2 className="font-display text-3xl font-semibold text-ink transition group-hover:text-ink-soft">
+                    <h2 className="font-display text-3xl font-semibold text-ink transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:text-ink-soft">
                       {service.title}
                     </h2>
                     <p className="mt-4 text-base leading-relaxed text-mute">

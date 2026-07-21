@@ -119,7 +119,7 @@ export default function Home() {
                   <span className="icon-badge">
                     <Icon className="size-5" aria-hidden />
                   </span>
-                  <h3 className="mt-5 font-display text-2xl font-semibold text-ink transition group-hover:text-ink-soft">
+                  <h3 className="mt-5 font-display text-2xl font-semibold text-ink transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:text-ink-soft">
                     {service.title}
                   </h3>
                   <p className="mt-4 text-base leading-relaxed text-mute">
@@ -129,7 +129,7 @@ export default function Home() {
                     {service.outcomes.map((item) => (
                       <li
                         key={item}
-                        className="border-l-2 border-signal pl-3 text-sm text-ink transition group-hover:border-ink-soft"
+                        className="border-l-2 border-signal pl-3 text-sm text-ink transition-[border-color] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:border-ink-soft"
                       >
                         {item}
                       </li>
@@ -174,7 +174,7 @@ export default function Home() {
                   key={item.title}
                   className="card-lift group border border-white/10 bg-white/5 p-6 hover:border-signal/40 hover:bg-white/[0.08]"
                 >
-                  <span className="inline-flex size-11 items-center justify-center bg-signal/15 text-signal transition duration-300 group-hover:bg-signal group-hover:text-ink">
+                  <span className="inline-flex size-11 items-center justify-center bg-signal/15 text-signal transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:bg-signal group-hover:text-ink">
                     <Icon className="size-5" aria-hidden />
                   </span>
                   <h3 className="mt-5 font-display text-xl font-semibold">
@@ -242,7 +242,7 @@ export default function Home() {
                     <span className="icon-badge">
                       <Icon className="size-5" aria-hidden />
                     </span>
-                    <span className="font-display text-4xl font-bold text-mist-deep transition group-hover:text-signal">
+                    <span className="font-display text-4xl font-bold text-mist-deep transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:text-signal">
                       {step.num}
                     </span>
                   </div>

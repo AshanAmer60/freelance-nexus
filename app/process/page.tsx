@@ -59,7 +59,7 @@ export default function ProcessPage() {
                     <span className="icon-badge">
                       <Icon className="size-5" aria-hidden />
                     </span>
-                    <span className="font-display text-5xl font-bold text-mist-deep transition group-hover:text-signal">
+                    <span className="font-display text-5xl font-bold text-mist-deep transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:text-signal">
                       {step.num}
                     </span>
                   </div>

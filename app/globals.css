@@ -12,6 +12,11 @@
   --line: rgba(6, 40, 88, 0.12);
   --background: var(--paper);
   --foreground: var(--ink);
+  --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast: 0.35s;
+  --dur-med: 0.5s;
+  --dur-slow: 0.65s;
 }
 
 @theme inline {
@@ -188,10 +193,10 @@ body {
   color: var(--ink);
   font-weight: 600;
   transition:
-    background 0.25s ease,
-    color 0.25s ease,
-    transform 0.25s ease,
-    box-shadow 0.25s ease;
+    background var(--dur-med) var(--ease-smooth),
+    color var(--dur-med) var(--ease-smooth),
+    transform var(--dur-med) var(--ease-out),
+    box-shadow var(--dur-med) var(--ease-smooth);
 }
 
 .btn-primary:hover {
@@ -213,9 +218,10 @@ body {
   color: rgba(255, 255, 255, 0.9);
   font-weight: 500;
   transition:
-    border-color 0.25s ease,
-    background 0.25s ease,
-    transform 0.25s ease;
+    border-color var(--dur-med) var(--ease-smooth),
+    background var(--dur-med) var(--ease-smooth),
+    transform var(--dur-med) var(--ease-out),
+    color var(--dur-med) var(--ease-smooth);
 }
 
 .btn-secondary:hover {
@@ -225,21 +231,22 @@ body {
 }
 
 .btn-arrow {
-  transition: transform 0.25s ease;
+  transition: transform var(--dur-med) var(--ease-out);
 }
 
 .card-lift {
   transition:
-    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.3s ease,
-    border-color 0.3s ease,
-    background 0.3s ease;
+    transform var(--dur-slow) var(--ease-out),
+    box-shadow var(--dur-slow) var(--ease-smooth),
+    border-color var(--dur-med) var(--ease-smooth),
+    background var(--dur-med) var(--ease-smooth),
+    color var(--dur-med) var(--ease-smooth);
 }
 
 .card-lift:hover {
-  transform: translateY(-6px);
+  transform: translateY(-5px);
   border-color: rgba(197, 139, 75, 0.45);
-  box-shadow: 0 24px 60px rgba(6, 40, 88, 0.1);
+  box-shadow: 0 22px 50px rgba(6, 40, 88, 0.1);
 }
 
 .icon-badge {
@@ -251,21 +258,21 @@ body {
   background: rgba(4, 123, 127, 0.1);
   color: var(--ink-soft);
   transition:
-    background 0.3s ease,
-    color 0.3s ease,
-    transform 0.3s ease;
+    background var(--dur-med) var(--ease-smooth),
+    color var(--dur-med) var(--ease-smooth),
+    transform var(--dur-slow) var(--ease-out);
 }
 
 .card-lift:hover .icon-badge,
 .group:hover .icon-badge {
   background: var(--signal);
   color: var(--ink);
-  transform: scale(1.06);
+  transform: scale(1.05);
 }
 
 .nav-link {
   position: relative;
-  transition: color 0.2s ease;
+  transition: color var(--dur-fast) var(--ease-smooth);
 }
 
 .nav-link::after {
@@ -278,7 +285,7 @@ body {
   background: var(--signal);
   transform: scaleX(0);
   transform-origin: left;
-  transition: transform 0.25s ease;
+  transition: transform var(--dur-med) var(--ease-out);
 }
 
 .nav-link:hover::after {
@@ -289,7 +296,9 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  transition: color 0.2s ease, gap 0.2s ease;
+  transition:
+    color var(--dur-fast) var(--ease-smooth),
+    gap var(--dur-med) var(--ease-out);
 }
 
 .link-arrow:hover {
@@ -297,7 +306,7 @@ body {
 }
 
 .link-arrow svg {
-  transition: transform 0.25s ease;
+  transition: transform var(--dur-med) var(--ease-out);
 }
 
 .link-arrow:hover svg {
@@ -306,26 +315,32 @@ body {
 
 .proof-item {
   transition:
-    transform 0.25s ease,
-    background 0.25s ease;
+    transform var(--dur-med) var(--ease-out),
+    background var(--dur-med) var(--ease-smooth);
 }
 
 .proof-item:hover {
-  transform: translateY(-3px);
+  transform: translateY(-2px);
+}
+
+.proof-item svg {
+  transition: transform var(--dur-med) var(--ease-out), color var(--dur-med) var(--ease-smooth);
 }
 
 .quote-mark {
-  transition: transform 0.35s ease, color 0.35s ease;
+  transition:
+    transform var(--dur-slow) var(--ease-out),
+    color var(--dur-med) var(--ease-smooth);
 }
 
 .card-lift:hover .quote-mark {
-  transform: scale(1.08);
+  transform: scale(1.06);
   color: var(--signal);
 }
 
 details summary {
   list-style: none;
-  transition: color 0.2s ease;
+  transition: color var(--dur-fast) var(--ease-smooth);
 }
 
 details summary::-webkit-details-marker {
@@ -337,7 +352,9 @@ details summary:hover {
 }
 
 .faq-toggle {
-  transition: transform 0.3s ease, color 0.3s ease;
+  transition:
+    transform var(--dur-med) var(--ease-out),
+    color var(--dur-med) var(--ease-smooth);
 }
 
 details[open] .faq-toggle {

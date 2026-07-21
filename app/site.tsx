@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import type { LucideIcon } from "lucide-react";
@@ -24,36 +23,10 @@ import {
   Target,
   Upload,
 } from "lucide-react";
+import { SiteLogo, navLinks } from "./brand";
+import { MobileNav } from "./mobile-nav";
 
-export function SiteLogo({
-  size = 44,
-  className = "",
-  priority = false,
-}: {
-  size?: number;
-  className?: string;
-  priority?: boolean;
-}) {
-  return (
-    <Image
-      src="/logo.jpeg"
-      alt="Freelance Nexus logo"
-      width={size}
-      height={size}
-      priority={priority}
-      className={`rounded-full bg-paper object-cover shadow-[0_8px_30px_rgba(6,40,88,0.18)] transition-transform duration-300 group-hover:scale-105 ${className}`}
-      style={{ width: size, height: size }}
-    />
-  );
-}
-
-export const navLinks = [
-  { href: "/services", label: "Services" },
-  { href: "/pricing", label: "Pricing" },
-  { href: "/use-cases", label: "Use Cases" },
-  { href: "/process", label: "Process" },
-  { href: "/faq", label: "FAQ" },
-];
+export { SiteLogo, navLinks } from "./brand";
 
 export const services: {
   slug: string;
@@ -327,11 +300,11 @@ export function SiteHeader({ dark = false }: { dark?: boolean }) {
           }`}
         >
           <SiteLogo size={40} priority className="ring-1 ring-black/5" />
-          <span className="hidden transition group-hover:text-signal sm:inline">
+          <span className="hidden transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:text-signal sm:inline">
             Freelance Nexus
           </span>
         </Link>
-        <div className="flex items-center gap-4 text-sm lg:gap-5">
+        <div className="flex items-center gap-3 text-sm sm:gap-4 lg:gap-5">
           {navLinks.map((link) => (
             <Link
               key={link.href}
@@ -341,10 +314,14 @@ export function SiteHeader({ dark = false }: { dark?: boolean }) {
               {link.label}
             </Link>
           ))}
-          <Link href="/contact" className="btn-primary px-4 py-2 text-sm">
+          <Link
+            href="/contact"
+            className="btn-primary hidden px-4 py-2 text-sm md:inline-flex"
+          >
             Get a quote
             <ArrowRight className="btn-arrow size-4" aria-hidden />
           </Link>
+          <MobileNav dark={dark} />
         </div>
       </nav>
     </header>
@@ -379,7 +356,7 @@ export function SiteFooter() {
                 className="link-arrow w-fit hover:text-ink"
               >
                 {link.label}
-                <ArrowRight className="size-3.5 opacity-0 transition group-hover:opacity-100" />
+                <ArrowRight className="size-3.5 opacity-0 transition-opacity duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:opacity-100" />
               </Link>
             ))}
             <Link href="/about" className="link-arrow w-fit hover:text-ink">
@@ -556,7 +533,7 @@ export function ProofStrip({ dark = false }: { dark?: boolean }) {
           >
             <div className="mb-2 flex items-center gap-2">
               <Icon
-                className={`size-4 transition duration-300 group-hover:scale-110 ${
+                className={`size-4 transition duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110 ${
                   dark ? "text-signal" : "text-ink-soft"
                 }`}
                 aria-hidden
