@@ -22,9 +22,9 @@ export const metadata: Metadata = {
   description:
     "Publish-ready transcripts in 24–72 hours—human-reviewed. Boutique transcription, translation, and recording support from Freelance Nexus.",
   icons: {
-    icon: [{ url: "/logo.jpeg", type: "image/jpeg" }],
-    shortcut: "/logo.jpeg",
-    apple: "/logo.jpeg",
+    icon: [{ url: "/favicon.png", type: "image/png" }],
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
   },
   openGraph: {
     title: "Freelance Nexus — Precision Transcription",
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/logo.jpeg",
+        url: "/logo.png",
         width: 800,
         height: 800,
         alt: "Freelance Nexus logo",

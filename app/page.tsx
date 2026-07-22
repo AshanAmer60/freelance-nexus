@@ -5,7 +5,6 @@ import {
   GuaranteeBand,
   PageFrame,
   ProofStrip,
-  QuoteCard,
   SectionHeading,
   SiteHeader,
   StudioStory,
@@ -46,7 +45,7 @@ function Waveform({ className = "" }: { className?: string }) {
 
 function HomeHero() {
   return (
-    <section className="hero-plane relative flex min-h-[100svh] flex-col overflow-hidden text-white">
+    <section className="hero-plane relative flex min-h-[100svh] flex-col overflow-x-hidden text-white">
       <SiteHeader dark />
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.07]"
@@ -58,9 +57,6 @@ function HomeHero() {
       <div className="pointer-events-none absolute inset-x-0 bottom-[6%] top-[48%] flex items-end justify-center opacity-90 md:inset-y-[14%] md:left-[46%] md:right-[-2%] md:items-center md:opacity-100">
         <div className="anim-rise anim-rise-delay-4 w-full max-w-3xl px-4 md:pr-6">
           <Waveform className="h-24 sm:h-32 md:h-52 lg:h-64" />
-          <div className="mt-2 hidden lg:block">
-            <QuoteCard />
-          </div>
         </div>
       </div>
       <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-1 flex-col justify-center px-5 pb-24 pt-20 sm:px-8 sm:pb-20 md:pb-16">
@@ -69,12 +65,12 @@ function HomeHero() {
             Freelance Nexus
           </p>
           <div className="accent-rule mt-3 sm:mt-4" />
-          <h1 className="anim-rise anim-rise-delay-1 mt-3 font-display text-[clamp(1.15rem,2.8vw,2.25rem)] font-semibold leading-snug tracking-tight text-white/95 sm:mt-4">
+          {/* <h1 className="anim-rise anim-rise-delay-1 mt-3 font-display text-[clamp(1.15rem,2.8vw,2.25rem)] font-semibold leading-snug tracking-tight text-white/95 sm:mt-4">
             Publish-ready transcripts in 24–72 hours—human-reviewed.
-          </h1>
+          </h1> */}
           <p className="anim-rise anim-rise-delay-2 mt-2 max-w-md text-[0.9rem] leading-relaxed text-white/65 sm:mt-4 sm:text-base md:text-lg">
             A boutique studio for creators, researchers, and professionals who
-            need clear, speaker-labeled text—not a ticket queue.
+            need clear, speaker-labeled text —not a ticket queue.
           </p>
           <div className="anim-rise anim-rise-delay-3 mt-5 flex flex-wrap gap-3 sm:mt-7">
             <Link href="/contact" className="btn-primary px-5 py-2.5 text-sm sm:px-6 sm:py-3.5">
@@ -97,9 +93,7 @@ export default function Home() {
       <section className="border-b border-[var(--line)] bg-paper/70 px-5 py-10 sm:px-8">
         <div className="mx-auto max-w-6xl">
           <ProofStrip />
-          <p className="mt-4 text-xs text-mute">
-            *Turnaround depends on audio length, clarity, and project options.
-          </p>
+        
         </div>
       </section>
 

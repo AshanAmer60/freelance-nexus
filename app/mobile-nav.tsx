@@ -79,7 +79,9 @@ export function MobileNav({ dark = false }: { dark?: boolean }) {
             onClick={() => setOpen(false)}
             className="group flex items-center gap-3"
           >
-            <SiteLogo size={40} className="ring-1 ring-black/5" />
+            <span className="inline-flex shrink-0">
+              <SiteLogo size={44} className="rounded-full ring-1 ring-black/5" />
+            </span>
             <span className="font-display text-sm font-semibold text-ink">
               Freelance Nexus
             </span>

@@ -19,12 +19,12 @@ export function SiteLogo({
 }) {
   return (
     <Image
-      src="/logo.jpeg"
+      src="/logo.png"
       alt="Freelance Nexus logo"
       width={size}
       height={size}
       priority={priority}
-      className={`rounded-full bg-paper object-cover shadow-[0_8px_30px_rgba(6,40,88,0.18)] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105 ${className}`}
+      className={`bg-paper object-contain p-1 shadow-[0_8px_30px_rgba(6,40,88,0.18)] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105 ${className}`}
       style={{ width: size, height: size }}
     />
   );

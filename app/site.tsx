@@ -346,14 +346,18 @@ export function SiteHeader({ dark = false }: { dark?: boolean }) {
 
   return (
     <header className="absolute inset-x-0 top-0 z-30">
-      <nav className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-5 sm:px-8">
+      <nav className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-4 sm:px-8 sm:py-5">
         <Link
           href="/"
           className={`group flex items-center gap-3 font-display text-sm font-semibold tracking-wide sm:text-base ${
             dark ? "text-white" : "text-ink"
           }`}
         >
-          <SiteLogo size={40} priority className="ring-1 ring-black/5" />
+          <SiteLogo
+            size={48}
+            priority
+            className="rounded-full ring-1 ring-black/5"
+          />
           <span className="hidden transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:text-signal sm:inline">
             Freelance Nexus
           </span>
@@ -543,7 +547,7 @@ export function InteriorHero({
   secondaryCta?: { href: string; label: string };
 }) {
   return (
-    <section className="hero-plane relative overflow-hidden text-white">
+    <section className="hero-plane relative overflow-x-hidden text-white">
       <SiteHeader dark />
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.07]"
@@ -605,37 +609,6 @@ export function SectionHeading({
       {copy ? (
         <p className="mt-5 text-lg leading-relaxed text-mute">{copy}</p>
       ) : null}
-    </div>
-  );
-}
-
-export function QuoteCard() {
-  return (
-    <div className="card-lift group relative overflow-hidden border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(197,139,75,0.2),_transparent_45%)]" />
-      <div className="relative flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-white/45">
-        <FileText className="icon-float size-4 text-signal" aria-hidden />
-        Sample excerpt
-      </div>
-      <div className="relative mt-6 space-y-4 font-mono text-sm leading-relaxed text-white/78">
-        <p className="text-signal">[00:12:04] Speaker 1</p>
-        <p>
-          When the recording is important, accuracy is not a feature. It is the
-          whole point.
-        </p>
-        <p className="text-signal">[00:12:28] Speaker 2</p>
-        <p>
-          Freelance Nexus delivers transcripts that read cleanly, preserve
-          intent, and still respect the original voice.
-        </p>
-      </div>
-      <Link
-        href="/sample"
-        className="link-arrow relative mt-6 text-sm font-medium text-signal hover:text-paper"
-      >
-        View & download sample
-        <ArrowRight className="size-4" aria-hidden />
-      </Link>
     </div>
   );
 }

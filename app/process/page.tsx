@@ -3,7 +3,6 @@ import {
   CtaBand,
   InteriorHero,
   PageFrame,
-  QuoteCard,
   SectionHeading,
   steps,
 } from "../site";
@@ -37,7 +36,6 @@ export default function ProcessPage() {
           eyebrow="Process"
           title="A reliable path from recording to delivery."
           copy="Simple on the surface. Careful at every stage—so accuracy, confidentiality, and turnaround stay aligned."
-          accent={<QuoteCard />}
         />
       }
     >
