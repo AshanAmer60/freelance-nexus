@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import {
   InteriorHero,
   PageFrame,
-  QuoteCard,
   SectionHeading,
 } from "../site";
 
@@ -28,7 +27,6 @@ export default function ContactPage() {
           eyebrow="Contact"
           title="Tell us what the recording needs to become."
           copy="The more context you share, the faster we can confirm scope, pricing, and turnaround."
-          accent={<QuoteCard />}
           primaryCta={{ href: "#quote-form", label: "Jump to form" }}
           secondaryCta={{ href: "/pricing", label: "View pricing" }}
         />

@@ -6,7 +6,6 @@ import {
   FeatureCheck,
   InteriorHero,
   PageFrame,
-  QuoteCard,
   SectionHeading,
   services,
 } from "../site";
@@ -25,7 +24,6 @@ export default function ServicesPage() {
           eyebrow="Services"
           title="Speech, text, and clarity—handled with care."
           copy="Transcription is our core. Translation and recording support complete the workflow when your project needs more than one step."
-          accent={<QuoteCard />}
           secondaryCta={{ href: "/sample", label: "View sample" }}
         />
       }

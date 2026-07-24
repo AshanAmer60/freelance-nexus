@@ -8,7 +8,6 @@ import {
   InteriorHero,
   PageFrame,
   ProofStrip,
-  QuoteCard,
   SectionHeading,
   studioStory,
 } from "../site";
@@ -42,7 +41,6 @@ export default function AboutPage() {
           eyebrow="About"
           title="A transcription studio with editorial instinct."
           copy="Freelance Nexus exists for clients who need more than a rough text export—accurate transcripts shaped for real use, from Adyala Road, RWP."
-          accent={<QuoteCard />}
         />
       }
     >
