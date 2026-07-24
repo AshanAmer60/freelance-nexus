@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import {
@@ -16,33 +17,6 @@ import {
   useCases,
 } from "./site";
 
-function Waveform({ className = "" }: { className?: string }) {
-  const bars = [
-    28, 44, 62, 38, 78, 52, 90, 48, 70, 36, 84, 58, 42, 96, 64, 46, 72, 34, 88,
-    54, 40, 76, 50, 92, 60, 32, 68, 46, 80, 56, 38, 74, 48, 86, 52, 66, 44, 78,
-    36, 70, 58, 82, 48, 64, 40, 76, 54, 88, 46, 72,
-  ];
-
-  return (
-    <div
-      className={`flex items-end justify-center gap-[2px] sm:gap-[3px] md:gap-1 ${className || "h-40 sm:h-56 md:h-72"}`}
-      aria-hidden="true"
-    >
-      {bars.map((height, i) => (
-        <span
-          key={i}
-          className="wave-bar w-[4px] sm:w-1.5 md:w-2 rounded-sm bg-gradient-to-t from-ink-soft/60 via-signal to-[#FDFDFD]"
-          style={{
-            height: `${height}%`,
-            animationDelay: `${(i % 12) * 0.11}s`,
-            animationDuration: `${1.3 + (i % 5) * 0.18}s`,
-          }}
-        />
-      ))}
-    </div>
-  );
-}
-
 function HomeHero() {
   return (
     <section className="hero-plane relative flex min-h-[100svh] flex-col overflow-x-hidden text-white">
@@ -54,9 +28,17 @@ function HomeHero() {
             "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
         }}
       />
-      <div className="pointer-events-none absolute inset-x-0 bottom-[6%] top-[48%] flex items-end justify-center opacity-90 md:inset-y-[14%] md:left-[46%] md:right-[-2%] md:items-center md:opacity-100">
-        <div className="anim-rise anim-rise-delay-4 w-full max-w-3xl px-4 md:pr-6">
-          <Waveform className="h-24 sm:h-32 md:h-52 lg:h-64" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-[2%] top-[45%] flex items-end justify-center md:inset-y-[12%] md:left-[44%] md:right-0 md:items-center">
+        <div className="anim-rise anim-rise-delay-4 w-full max-w-[22rem] px-4 sm:max-w-md md:max-w-xl lg:max-w-2xl md:pr-6">
+          <Image
+            src="/hero1.png"
+            alt="Headphones around a stack of books with people listening and reading"
+            width={1024}
+            height={1024}
+            priority
+            sizes="(max-width: 768px) 90vw, 50vw"
+            className="h-auto w-full object-contain"
+          />
         </div>
       </div>
       <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-1 flex-col justify-center px-5 pb-24 pt-20 sm:px-8 sm:pb-20 md:pb-16">
