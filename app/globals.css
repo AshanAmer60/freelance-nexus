@@ -69,9 +69,10 @@ body {
 
 .hero-plane {
   background:
-    radial-gradient(ellipse 80% 70% at 75% 45%, rgba(197, 139, 75, 0.22), transparent 55%),
-    radial-gradient(ellipse 60% 50% at 20% 80%, rgba(4, 123, 127, 0.35), transparent 50%),
-    linear-gradient(135deg, #041f42 0%, #062858 42%, #047b7f 100%);
+    radial-gradient(ellipse 70% 55% at 85% 55%, rgba(4, 123, 127, 0.28), transparent 58%),
+    radial-gradient(ellipse 50% 45% at 12% 80%, rgba(197, 139, 75, 0.14), transparent 52%),
+    radial-gradient(ellipse 40% 35% at 40% 0%, rgba(255, 255, 255, 0.05), transparent 55%),
+    linear-gradient(160deg, #031933 0%, #062858 48%, #035a5e 100%);
 }
 
 @keyframes wave-pulse {
@@ -112,7 +113,29 @@ body {
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-10px);
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes hero-glow {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: translate(-50%, -50%) scale(0.92);
+  }
+  50% {
+    opacity: 0.85;
+    transform: translate(-50%, -50%) scale(1.05);
+  }
+}
+
+@keyframes hero-ken {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.035);
   }
 }
 
@@ -165,6 +188,15 @@ body {
 
 .hero-drift {
   animation: drift 7s ease-in-out infinite;
+}
+
+.hero-glow {
+  animation: hero-glow 5.5s ease-in-out infinite;
+}
+
+.hero-ken {
+  animation: hero-ken 14s ease-in-out infinite;
+  transform-origin: center center;
 }
 
 .icon-float {
@@ -366,6 +398,8 @@ details[open] .faq-toggle {
   .anim-rise,
   .wave-bar,
   .hero-drift,
+  .hero-glow,
+  .hero-ken,
   .accent-rule,
   .icon-float,
   .soft-pulse {

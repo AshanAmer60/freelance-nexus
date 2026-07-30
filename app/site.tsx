@@ -339,26 +339,44 @@ export function DownloadSampleLink({
   );
 }
 
-export function SiteHeader({ dark = false }: { dark?: boolean }) {
-  const textClass = dark
+export function SiteHeader({
+  dark = false,
+  solid = false,
+}: {
+  dark?: boolean;
+  solid?: boolean;
+}) {
+  const textClass = dark && !solid
     ? "text-white/75 hover:text-white"
     : "text-mute hover:text-ink";
 
   return (
-    <header className="absolute inset-x-0 top-0 z-30">
-      <nav className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-4 sm:px-8 sm:py-5">
+    <header
+      className={
+        solid
+          ? "relative z-30 border-b border-[var(--line)] bg-paper/95 backdrop-blur-md"
+          : "absolute inset-x-0 top-0 z-30"
+      }
+    >
+      <nav className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3.5 sm:px-8 sm:py-4">
         <Link
           href="/"
           className={`group flex items-center gap-3 font-display text-sm font-semibold tracking-wide sm:text-base ${
-            dark ? "text-white" : "text-ink"
+            dark && !solid ? "text-white" : "text-ink"
           }`}
         >
           <SiteLogo
-            size={48}
+            size={44}
             priority
             className="rounded-full ring-1 ring-black/5"
           />
-          <span className="hidden transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:text-signal sm:inline">
+          <span
+            className={`hidden transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:inline ${
+              solid
+                ? "group-hover:text-ink-soft"
+                : "group-hover:text-signal"
+            }`}
+          >
             Freelance Nexus
           </span>
         </Link>
@@ -379,7 +397,7 @@ export function SiteHeader({ dark = false }: { dark?: boolean }) {
             Get a quote
             <ArrowRight className="btn-arrow size-4" aria-hidden />
           </Link>
-          <MobileNav dark={dark} />
+          <MobileNav dark={dark && !solid} />
         </div>
       </nav>
     </header>
@@ -558,10 +576,10 @@ export function InteriorHero({
       />
       <div className="relative mx-auto grid min-h-[62svh] max-w-6xl gap-10 px-5 pb-16 pt-28 sm:px-8 sm:pb-20 lg:grid-cols-[1fr_0.85fr] lg:items-end">
         <div className="max-w-2xl">
-          <p className="anim-rise text-sm font-semibold uppercase tracking-[0.2em] text-white/55">
+          <p className="anim-rise inline-flex border border-white/15 bg-white/5 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-white/70">
             {eyebrow}
           </p>
-          <h1 className="anim-rise anim-rise-delay-1 mt-4 font-display text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
+          <h1 className="anim-rise anim-rise-delay-1 mt-5 font-display text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
             {title}
           </h1>
           <div className="accent-rule mt-5" />
@@ -593,21 +611,37 @@ export function SectionHeading({
   eyebrow,
   title,
   copy,
+  align = "left",
 }: {
   eyebrow: string;
   title: string;
   copy?: string;
+  align?: "left" | "center";
 }) {
+  const centered = align === "center";
+
   return (
-    <div className="max-w-3xl">
-      <p className="font-display text-sm font-semibold uppercase tracking-[0.2em] text-mute">
+    <div className={centered ? "mx-auto max-w-3xl text-center" : "max-w-3xl"}>
+      <p
+        className={`inline-flex items-center border border-ink-soft/20 bg-ink-soft/10 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-ink-soft`}
+      >
         {eyebrow}
       </p>
-      <h2 className="mt-4 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl md:text-5xl">
+      <h2
+        className={`mt-5 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl md:text-[2.75rem] md:leading-[1.1] ${
+          centered ? "mx-auto" : ""
+        }`}
+      >
         {title}
       </h2>
       {copy ? (
-        <p className="mt-5 text-lg leading-relaxed text-mute">{copy}</p>
+        <p
+          className={`mt-5 text-lg leading-relaxed text-mute ${
+            centered ? "mx-auto max-w-2xl" : ""
+          }`}
+        >
+          {copy}
+        </p>
       ) : null}
     </div>
   );
@@ -626,7 +660,9 @@ export function ProofStrip({ dark = false }: { dark?: boolean }) {
           <div
             key={item.label}
             className={`proof-item group border-l-2 border-signal pl-4 ${
-              dark ? "" : "bg-paper/50 py-2"
+              dark
+                ? "border-l-signal/80 bg-white/[0.03] py-3 pr-3"
+                : "bg-paper/50 py-2"
             }`}
           >
             <div className="mb-2 flex items-center gap-2">
@@ -705,8 +741,16 @@ export function FeatureCheck({
 
 export function StudioStory() {
   return (
-    <section className="px-5 py-24 sm:px-8 sm:py-32">
-      <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+    <section className="relative overflow-hidden bg-paper px-5 py-24 sm:px-8 sm:py-32">
+      <div
+        className="pointer-events-none absolute -right-24 top-20 h-64 w-64 rounded-full bg-ink-soft/10 blur-3xl"
+        aria-hidden="true"
+      />
+      <div
+        className="pointer-events-none absolute -left-20 bottom-10 h-56 w-56 rounded-full bg-signal/10 blur-3xl"
+        aria-hidden="true"
+      />
+      <div className="relative mx-auto grid max-w-6xl gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-16">
         <div>
           <SectionHeading
             eyebrow={studioStory.eyebrow}
@@ -714,20 +758,38 @@ export function StudioStory() {
             copy={studioStory.copy}
           />
           <div className="mt-8 flex flex-wrap gap-3">
-            <Link href="/about" className="btn-primary bg-ink px-6 py-3 text-sm text-paper hover:bg-ink-soft hover:text-paper">
+            <Link
+              href="/about"
+              className="group inline-flex items-center justify-center gap-2 bg-ink px-6 py-3 text-sm font-semibold text-paper transition duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:bg-ink-soft"
+            >
               Our story
-              <ArrowRight className="btn-arrow size-4" aria-hidden />
+              <ArrowRight
+                className="size-4 transition group-hover:translate-x-1"
+                aria-hidden
+              />
             </Link>
-            <DownloadSampleLink className="link-arrow border border-[var(--line)] bg-paper px-6 py-3 text-sm font-medium text-ink transition hover:border-signal" />
+            <DownloadSampleLink className="inline-flex items-center gap-2 border border-[var(--line)] bg-mist/40 px-6 py-3 text-sm font-medium text-ink transition duration-500 hover:border-signal hover:bg-paper" />
           </div>
         </div>
+
         <ul className="space-y-4">
-          {studioStory.points.map((point) => (
+          {studioStory.points.map((point, index) => (
             <li
               key={point}
-              className="card-lift border-l-2 border-signal bg-paper/80 px-5 py-5 text-base leading-relaxed text-ink shadow-[0_12px_40px_rgba(6,40,88,0.04)]"
+              className="group relative overflow-hidden bg-mist/50 px-6 py-6 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:bg-ink sm:px-7"
             >
-              {point}
+              <span
+                className="absolute inset-y-0 left-0 w-[3px] bg-signal"
+                aria-hidden="true"
+              />
+              <div className="flex items-start gap-4">
+                <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-full border border-ink/10 bg-paper font-display text-sm font-bold text-ink-soft transition-all duration-500 group-hover:border-signal/40 group-hover:bg-signal group-hover:text-ink">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <p className="pt-1.5 text-base leading-relaxed text-ink transition-colors duration-500 group-hover:text-white">
+                  {point}
+                </p>
+              </div>
             </li>
           ))}
         </ul>
@@ -738,45 +800,75 @@ export function StudioStory() {
 
 export function GuaranteeBand() {
   return (
-    <section className="px-5 py-24 sm:px-8 sm:py-32">
-      <div className="mx-auto max-w-6xl overflow-hidden border border-[var(--line)] bg-mist/40">
-        <div className="grid gap-0 lg:grid-cols-[0.9fr_1.1fr]">
-          <div className="bg-ink px-8 py-12 text-white sm:px-10 sm:py-14">
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-white/45">
+    <section className="relative overflow-hidden bg-mist/35 px-5 py-24 sm:px-8 sm:py-32">
+      <div
+        className="pointer-events-none absolute -left-24 top-16 h-64 w-64 rounded-full bg-signal/10 blur-3xl"
+        aria-hidden="true"
+      />
+      <div
+        className="pointer-events-none absolute -right-20 bottom-10 h-56 w-56 rounded-full bg-ink-soft/10 blur-3xl"
+        aria-hidden="true"
+      />
+      <div className="relative mx-auto max-w-6xl">
+        <div className="grid gap-5 lg:grid-cols-[0.95fr_1.05fr] lg:gap-6 lg:items-stretch">
+          <div className="relative overflow-hidden bg-ink px-8 py-12 text-white sm:px-10 sm:py-14">
+            <span
+              className="absolute inset-x-0 top-0 h-[3px] bg-signal"
+              aria-hidden="true"
+            />
+            <p className="inline-flex border border-white/15 bg-white/5 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-[#9fd8da]">
               Our promise
             </p>
-            <h2 className="mt-4 font-display text-3xl font-bold tracking-tight sm:text-4xl">
+            <h2 className="mt-5 font-display text-3xl font-bold tracking-tight sm:text-4xl">
               Publish-ready transcripts. Human-reviewed before delivery.
             </h2>
             <p className="mt-5 text-base leading-relaxed text-white/65">
               Typical turnaround is 24–72 hours depending on length and
               complexity. If we miss the agreed brief, we revise.
             </p>
-            <Link href="/contact" className="btn-primary mt-8 px-6 py-3 text-sm">
+            <Link
+              href="/contact"
+              className="group mt-8 inline-flex items-center justify-center gap-2 bg-signal px-6 py-3 text-sm font-semibold text-ink transition duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:bg-paper"
+            >
               Get a free quote
-              <ArrowRight className="btn-arrow size-4" aria-hidden />
+              <ArrowRight
+                className="size-4 transition group-hover:translate-x-1"
+                aria-hidden
+              />
             </Link>
           </div>
-          <div className="grid gap-0 sm:grid-cols-1">
-            {guarantees.map((item) => (
-              <div
+
+          <ul className="grid gap-4">
+            {guarantees.map((item, index) => (
+              <li
                 key={item.title}
-                className="card-lift border-b border-[var(--line)] bg-paper/70 px-8 py-8 last:border-b-0 sm:px-10"
+                className="group relative overflow-hidden bg-paper px-6 py-6 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:bg-ink sm:px-7 sm:py-7"
               >
-                <div className="flex items-start gap-3">
-                  <BadgeCheck className="mt-0.5 size-5 shrink-0 text-ink-soft" aria-hidden />
-                  <div>
-                    <h3 className="font-display text-xl font-semibold text-ink">
-                      {item.title}
-                    </h3>
-                    <p className="mt-2 text-sm leading-relaxed text-mute">
+                <span
+                  className="absolute inset-x-0 top-0 h-[3px] bg-signal"
+                  aria-hidden="true"
+                />
+                <div className="flex items-start gap-4">
+                  <span className="inline-flex size-11 shrink-0 items-center justify-center rounded-full border border-ink/10 bg-mist text-ink-soft transition-all duration-500 group-hover:border-signal/40 group-hover:bg-signal group-hover:text-ink">
+                    <BadgeCheck className="size-5" aria-hidden />
+                  </span>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-start justify-between gap-3">
+                      <h3 className="font-display text-xl font-semibold text-ink transition-colors duration-500 group-hover:text-white">
+                        {item.title}
+                      </h3>
+                      <span className="shrink-0 font-display text-sm font-bold tracking-wide text-mist-deep transition-colors duration-500 group-hover:text-white/30">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                    </div>
+                    <p className="mt-2 text-sm leading-relaxed text-mute transition-colors duration-500 group-hover:text-white/65">
                       {item.copy}
                     </p>
                   </div>
                 </div>
-              </div>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </div>
     </section>
@@ -784,8 +876,8 @@ export function GuaranteeBand() {
 }
 
 export function CtaBand({
-  title = "Ready when your audio is.",
-  copy = "Share length, speakers, deadline, and format. We’ll reply with a clear quote.",
+  title = "Ready to get started?",
+  copy = "Partner with a boutique transcription studio for accurate, confidential, human-reviewed delivery. Share your brief and we’ll reply with a clear quote.",
 }: {
   title?: string;
   copy?: string;
@@ -800,21 +892,21 @@ export function CtaBand({
         className="pointer-events-none absolute bottom-0 left-0 h-48 w-48 rounded-full bg-ink-soft/40 blur-3xl"
         aria-hidden
       />
-      <div className="relative mx-auto w-full max-w-6xl">
-        <h2 className="font-display text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
-          {title}
-        </h2>
-        <p className="mt-5 max-w-2xl text-lg leading-relaxed text-white/65">
-          {copy}
-        </p>
-        <div className="mt-10 flex flex-wrap gap-3">
+      <div className="relative mx-auto flex w-full max-w-6xl flex-col items-start gap-8 lg:flex-row lg:items-end lg:justify-between">
+        <div className="max-w-2xl">
+          <h2 className="font-display text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
+            {title}
+          </h2>
+          <p className="mt-5 text-lg leading-relaxed text-white/65">{copy}</p>
+        </div>
+        <div className="flex flex-wrap gap-3">
           <Link href="/contact" className="btn-primary px-8 py-3.5 text-sm">
             Request a quote
             <ArrowRight className="btn-arrow size-4" aria-hidden />
           </Link>
           <DownloadSampleLink
             className="btn-secondary px-8 py-3.5 text-sm"
-            label="Download a sample transcript"
+            label="Download a sample"
           />
         </div>
       </div>
