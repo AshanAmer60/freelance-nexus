@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, PlayCircle } from "lucide-react";
+import { HeroCursor } from "./hero-cursor";
+import { ServicesCarousel } from "./services-carousel";
 import {
   CtaBand,
   GuaranteeBand,
@@ -19,9 +21,16 @@ import {
 
 function HomeHero() {
   return (
-    <section className="relative flex h-[100svh] max-h-[100svh] flex-col overflow-hidden">
+    <section
+      id="home-hero"
+      className="relative flex h-[100svh] max-h-[100svh] flex-col overflow-hidden"
+    >
       <SiteHeader solid />
-      <div className="relative flex min-h-0 flex-1 flex-col overflow-hidden bg-[#062858] text-white">
+      <HeroCursor />
+      <div
+        id="home-hero-stage"
+        className="relative flex min-h-0 flex-1 flex-col overflow-hidden bg-[#062858] text-white"
+      >
         <div
           className="pointer-events-none absolute inset-0 opacity-[0.04]"
           aria-hidden="true"
@@ -63,7 +72,7 @@ function HomeHero() {
         <div className="relative z-10 mx-auto flex w-[90vw] max-w-[90vw] min-h-0 flex-1 flex-col justify-center py-6 sm:py-8 lg:py-10">
           <div className="grid min-h-0 items-center gap-6 lg:grid-cols-[1fr_1.1fr] lg:gap-10 xl:gap-12">
             <div className="order-2 lg:order-1">
-              <p className="anim-rise inline-flex items-center gap-2 border border-[#7ec8cb]/25 bg-[#7ec8cb]/10 px-3.5 py-1.5 text-xs font-semibold tracking-wide text-[#9fd8da]">
+              <p className="anim-rise inline-flex items-center gap-2 rounded-full border border-[#7ec8cb]/25 bg-[#7ec8cb]/10 px-3.5 py-1.5 text-xs font-semibold tracking-wide text-[#9fd8da]">
                 Human-reviewed transcription studio
               </p>
 
@@ -85,7 +94,7 @@ function HomeHero() {
               <div className="anim-rise anim-rise-delay-3 mt-6 flex flex-wrap items-center gap-4 sm:mt-8 sm:gap-5">
                 <Link
                   href="/contact"
-                  className="group inline-flex items-center justify-center gap-2 bg-[#0a3d7a] px-7 py-3.5 text-sm font-semibold text-white transition duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:bg-[#0c4a94]"
+                  className="group inline-flex items-center justify-center gap-2 rounded-full bg-[#0a3d7a] px-7 py-3.5 text-sm font-semibold text-white transition duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:bg-[#0c4a94]"
                 >
                   Get Started
                   <ArrowRight
@@ -105,21 +114,28 @@ function HomeHero() {
               </div>
             </div>
 
-            <div className="order-1 flex min-h-0 justify-center lg:order-2 lg:justify-end">
-              <div className="relative w-full max-w-[26rem] sm:max-w-[32rem] md:max-w-[38rem] lg:max-w-none lg:w-[min(100%,42rem)] xl:w-[min(100%,48rem)]">
+            <div className="order-1 hidden min-h-0 justify-center lg:order-2 lg:flex lg:justify-end">
+              <div className="group relative w-full max-w-[26rem] pt-5 pr-5 pl-3 sm:max-w-[32rem] sm:pt-6 sm:pr-6 sm:pl-4 md:max-w-[38rem] lg:max-w-none lg:w-[min(100%,42rem)] xl:w-[min(100%,48rem)]">
+                {/* Far back stacked card — slight left tilt */}
                 <div
-                  className="hero-glow pointer-events-none absolute left-1/2 top-1/2 h-[78%] w-[78%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,_rgba(126,200,203,0.4)_0%,_rgba(197,139,75,0.12)_45%,_transparent_70%)] blur-2xl"
+                  className="absolute top-0 right-3 bottom-5 left-2 -translate-x-2 -rotate-3 rounded-[18px] bg-[#a8c8d6]/30 transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform group-hover:-translate-x-4 group-hover:-rotate-5 sm:bottom-6 sm:left-3 sm:right-4 sm:-translate-x-3 sm:group-hover:-translate-x-5"
                   aria-hidden="true"
                 />
-                <div className="hero-drift anim-rise anim-rise-delay-4 relative overflow-hidden rounded-[10px] shadow-[0_20px_60px_rgba(0,0,0,0.35)] ring-1 ring-white/15">
+                {/* Near back stacked card */}
+                <div
+                  className="absolute top-1 right-2 bottom-4 left-1 -translate-x-1.5 -rotate-1 rounded-[18px] bg-[#a8c8d6]/45 transition-transform duration-[1100ms] ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform group-hover:-translate-x-3 group-hover:-rotate-[2.5deg] sm:bottom-5 sm:left-2 sm:right-3 sm:-translate-x-2 sm:group-hover:-translate-x-3.5"
+                  aria-hidden="true"
+                />
+                {/* Front image card */}
+                <div className="relative overflow-hidden rounded-[18px] shadow-[0_20px_55px_rgba(0,0,0,0.38)] transition-[transform,box-shadow] duration-[1000ms] ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform group-hover:-translate-y-1.5 group-hover:shadow-[0_28px_70px_rgba(0,0,0,0.48)]">
                   <Image
                     src="/heroteam.jpg"
                     alt="Team collaborating with laptops and headphones in a studio workspace"
                     width={1600}
                     height={1200}
                     priority
-                    sizes="(max-width: 1024px) 60vw, 48vw"
-                    className="hero-ken relative mx-auto h-auto max-h-[36svh] w-full object-cover object-center sm:max-h-[44svh] lg:max-h-[min(62svh,36rem)]"
+                    sizes="(max-width: 1023px) 0px, 48vw"
+                    className="relative mx-auto block h-auto max-h-[36svh] w-full object-cover object-center transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform group-hover:scale-[1.035] sm:max-h-[44svh] lg:max-h-[min(62svh,36rem)]"
                   />
                 </div>
               </div>
@@ -134,18 +150,18 @@ function HomeHero() {
 export default function Home() {
   return (
     <PageFrame hero={<HomeHero />}>
-      <section className="relative overflow-hidden border-b border-[var(--line)] bg-paper px-5 py-16 sm:px-8 sm:py-20">
+      <section className="relative overflow-hidden border-b border-[var(--line)] bg-paper py-16 sm:py-20">
         <div
           className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-signal/50 to-transparent"
           aria-hidden="true"
         />
-        <div className="relative mx-auto max-w-6xl">
+        <div className="relative mx-auto w-[90vw] max-w-[90vw]">
           <div className="mx-auto max-w-2xl text-center">
-            <p className="inline-flex border border-ink-soft/20 bg-ink-soft/10 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-ink-soft">
+            <p className="inline-flex rounded-full border border-ink-soft/20 bg-ink-soft/10 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-ink-soft">
               Delivery standards
             </p>
             <h2 className="mt-5 font-display text-2xl font-bold tracking-tight text-ink sm:text-3xl md:text-[2.15rem] md:leading-tight">
-              Built for clarity, confidentiality, and deadline work
+              Clear. Confidential. On time.
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-mute">
               The essentials clients check before sending a file—scoped clearly,
@@ -153,30 +169,30 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
+          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {proofPoints.map((item, index) => {
               const Icon = item.icon;
               return (
                 <article
                   key={item.label}
-                  className="group relative overflow-hidden bg-mist/50 px-6 py-7 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:bg-ink sm:px-7 sm:py-8"
+                  className="group relative rounded-[16px] bg-paper p-6 shadow-[0_10px_30px_rgba(6,40,88,0.06)] ring-1 ring-[var(--line)] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:shadow-[0_18px_40px_rgba(6,40,88,0.12)] hover:ring-signal/40 sm:p-7"
                 >
-                  <span
-                    className="absolute inset-x-0 top-0 h-[3px] bg-signal"
+                  <div
+                    className="absolute -inset-x-1 -top-1 bottom-2 -z-10 rounded-[16px] bg-[#a8c8d6]/25 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
                     aria-hidden="true"
                   />
-                  <div className="flex items-start justify-between gap-3">
-                    <span className="inline-flex size-11 items-center justify-center rounded-full border border-ink/10 bg-paper text-ink-soft transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:border-signal/40 group-hover:bg-signal group-hover:text-ink">
+                  <div className="flex items-center justify-between gap-3">
+                    <span className="inline-flex size-11 items-center justify-center rounded-full bg-mist text-ink-soft transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:bg-signal group-hover:text-white">
                       <Icon className="size-5" aria-hidden />
                     </span>
-                    <span className="font-display text-sm font-bold tracking-wide text-mist-deep transition-colors duration-500 group-hover:text-white/30">
+                    <span className="font-display text-xs font-bold tracking-[0.14em] text-mist-deep">
                       {String(index + 1).padStart(2, "0")}
                     </span>
                   </div>
-                  <p className="mt-6 font-display text-[1.7rem] font-bold leading-none tracking-tight text-ink transition-colors duration-500 group-hover:text-white sm:text-3xl">
+                  <p className="mt-6 font-display text-2xl font-bold leading-none tracking-tight text-ink sm:text-[1.75rem]">
                     {item.value}
                   </p>
-                  <p className="mt-3 text-xs font-semibold uppercase tracking-[0.16em] text-mute transition-colors duration-500 group-hover:text-white/55">
+                  <p className="mt-3 text-xs font-semibold uppercase tracking-[0.16em] text-mute">
                     {item.label}
                   </p>
                 </article>
@@ -187,180 +203,157 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-mist/35 px-5 py-24 sm:px-8 sm:py-32">
-        <div
-          className="pointer-events-none absolute -right-24 top-20 h-64 w-64 rounded-full bg-ink-soft/10 blur-3xl"
-          aria-hidden="true"
-        />
-        <div
-          className="pointer-events-none absolute -left-20 bottom-10 h-56 w-56 rounded-full bg-signal/10 blur-3xl"
-          aria-hidden="true"
-        />
-        <div className="relative mx-auto max-w-6xl">
-          <SectionHeading
-            align="center"
-            eyebrow="Our services"
-            title="Comprehensive language solutions"
-            copy="Transcription first—with translation and recording support when your project needs more than one step."
-          />
-          <div className="mt-14 grid gap-5 lg:grid-cols-3 lg:gap-6">
-            {services.map((service, index) => {
-              const Icon = service.icon;
-              return (
-                <article
-                  key={service.slug}
-                  className="group relative flex flex-col overflow-hidden bg-paper px-7 py-8 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:bg-ink sm:px-8 sm:py-9"
-                >
-                  <span
-                    className="absolute inset-x-0 top-0 h-[3px] bg-signal"
-                    aria-hidden="true"
-                  />
-                  <div className="flex items-start justify-between gap-3">
-                    <span className="inline-flex size-12 items-center justify-center rounded-full border border-ink/10 bg-mist text-ink-soft transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:border-signal/40 group-hover:bg-signal group-hover:text-ink">
-                      <Icon className="size-5" aria-hidden />
-                    </span>
-                    <span className="font-display text-sm font-bold tracking-wide text-mist-deep transition-colors duration-500 group-hover:text-white/30">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                  </div>
-
-                  <h3 className="mt-6 font-display text-2xl font-semibold text-ink transition-colors duration-500 group-hover:text-white">
-                    {service.title}
-                  </h3>
-                  <p className="mt-4 flex-1 text-base leading-relaxed text-mute transition-colors duration-500 group-hover:text-white/65">
-                    {service.summary}
-                  </p>
-
-                  <ul className="mt-7 space-y-3 border-t border-[var(--line)] pt-6 transition-colors duration-500 group-hover:border-white/15">
-                    {service.outcomes.map((item) => (
-                      <li
-                        key={item}
-                        className="flex items-start gap-2.5 text-sm text-ink transition-colors duration-500 group-hover:text-white/85"
-                      >
-                        <span
-                          className="mt-1.5 size-1.5 shrink-0 rounded-full bg-signal"
-                          aria-hidden="true"
-                        />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-
-                  <Link
-                    href="/services"
-                    className="link-arrow mt-8 text-sm font-semibold text-ink-soft transition-colors duration-500 group-hover:text-signal"
-                  >
-                    Learn more
-                    <ArrowRight className="size-4" aria-hidden />
-                  </Link>
-                </article>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      <section className="relative overflow-hidden border-y border-[var(--line)] bg-paper px-5 py-24 sm:px-8 sm:py-32">
+      <section className="relative overflow-hidden bg-paper py-24 sm:py-32">
         <div
           className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-signal/40 to-transparent"
           aria-hidden="true"
         />
-        <div className="relative mx-auto max-w-6xl">
+        <div className="relative mx-auto w-[90vw] max-w-[90vw]">
+          <SectionHeading
+            align="center"
+            eyebrow="Our services"
+            title="Language solutions"
+            copy="Transcription first—with translation and recording support when your project needs more than one step."
+          />
+          <ServicesCarousel
+            items={services.map(
+              ({ slug, title, summary, details, outcomes, image, imageAlt }) => ({
+                slug,
+                title,
+                summary,
+                details,
+                outcomes,
+                image,
+                imageAlt,
+              }),
+            )}
+          />
+        </div>
+      </section>
+
+      <section className="relative overflow-hidden border-y border-[var(--line)] bg-paper py-24 sm:py-32">
+        <div
+          className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-signal/40 to-transparent"
+          aria-hidden="true"
+        />
+        <div className="relative mx-auto w-[90vw] max-w-[90vw]">
           <SectionHeading
             align="center"
             eyebrow="How it works"
-            title="A streamlined path from recording to delivery"
+            title="From recording to delivery"
             copy="Simple on the surface. Careful at every stage—so accuracy, confidentiality, and turnaround stay aligned."
           />
-          <ol className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-4 lg:gap-5">
-            {steps.map((step) => {
-              const Icon = step.icon;
-              return (
-                <li
-                  key={step.num}
-                  className="group relative flex flex-col overflow-hidden bg-mist/50 px-6 py-7 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:bg-ink sm:px-7 sm:py-8"
-                >
-                  <span
-                    className="absolute inset-x-0 top-0 h-[3px] bg-signal"
-                    aria-hidden="true"
-                  />
-                  <div className="flex items-start justify-between gap-3">
-                    <span className="inline-flex size-12 items-center justify-center rounded-full border border-ink/10 bg-paper text-ink-soft transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:border-signal/40 group-hover:bg-signal group-hover:text-ink">
-                      <Icon className="size-5" aria-hidden />
-                    </span>
-                    <span className="font-display text-3xl font-bold leading-none tracking-tight text-mist-deep transition-colors duration-500 group-hover:text-signal sm:text-4xl">
-                      {step.num}
-                    </span>
-                  </div>
-                  <h3 className="mt-6 font-display text-xl font-semibold text-ink transition-colors duration-500 group-hover:text-white">
-                    {step.title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-mute transition-colors duration-500 group-hover:text-white/65">
-                    {step.copy}
-                  </p>
-                </li>
-              );
-            })}
-          </ol>
+          <div className="relative mt-14">
+            <div
+              className="pointer-events-none absolute top-[3.25rem] right-[8%] left-[8%] hidden h-px bg-gradient-to-r from-transparent via-signal/50 to-transparent lg:block"
+              aria-hidden="true"
+            />
+            <ol className="relative grid gap-6 md:grid-cols-2 lg:grid-cols-4 lg:gap-5">
+              {steps.map((step, index) => {
+                const Icon = step.icon;
+                return (
+                  <li
+                    key={step.num}
+                    className="group relative flex flex-col rounded-[20px] bg-paper p-7 shadow-[0_12px_36px_rgba(6,40,88,0.07)] ring-1 ring-[var(--line)] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5 hover:shadow-[0_22px_50px_rgba(6,40,88,0.14)] hover:ring-signal/45 sm:p-8"
+                  >
+                    <div
+                      className="absolute -inset-x-1.5 -top-1.5 bottom-3 -z-10 rounded-[20px] bg-[#a8c8d6]/30 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                      aria-hidden="true"
+                    />
+
+                    <div className="relative flex items-center justify-between gap-3">
+                      <span className="relative z-10 inline-flex size-14 items-center justify-center rounded-full bg-mist font-display text-lg font-bold tracking-wide text-ink-soft ring-4 ring-paper transition-all duration-500 group-hover:bg-signal group-hover:text-white">
+                        {step.num}
+                      </span>
+                      <span className="inline-flex size-10 items-center justify-center rounded-full bg-mist/80 text-ink-soft transition-all duration-500 group-hover:bg-ink group-hover:text-white">
+                        <Icon className="size-4" aria-hidden />
+                      </span>
+                    </div>
+
+                    {index < steps.length - 1 ? (
+                      <span
+                        className="absolute top-[3.4rem] -right-3 z-20 hidden size-2.5 rounded-full bg-signal lg:block"
+                        aria-hidden="true"
+                      />
+                    ) : null}
+
+                    <h3 className="mt-7 font-display text-xl font-semibold tracking-tight text-ink">
+                      {step.title}
+                    </h3>
+                    <p className="mt-3 text-sm leading-relaxed text-mute">
+                      {step.copy}
+                    </p>
+                  </li>
+                );
+              })}
+            </ol>
+          </div>
         </div>
       </section>
 
       <section className="relative overflow-hidden bg-ink text-white">
         <div
-          className="pointer-events-none absolute -left-24 top-24 h-72 w-72 rounded-full bg-ink-soft/20 blur-3xl"
+          className="pointer-events-none absolute -left-24 top-10 h-80 w-80 rounded-full bg-ink-soft/25 blur-3xl"
           aria-hidden="true"
         />
         <div
-          className="pointer-events-none absolute -right-16 bottom-10 h-64 w-64 rounded-full bg-signal/20 blur-3xl"
+          className="pointer-events-none absolute -right-20 bottom-0 h-72 w-72 rounded-full bg-signal/15 blur-3xl"
           aria-hidden="true"
         />
-        <div className="relative mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-28">
-          <div className="mx-auto max-w-3xl text-center">
-            <p className="inline-flex border border-white/15 bg-white/5 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-[#9fd8da]">
+        <div
+          className="pointer-events-none absolute inset-0 opacity-[0.04]"
+          aria-hidden="true"
+          style={{
+            backgroundImage:
+              "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
+          }}
+        />
+
+        <div className="relative mx-auto grid w-[90vw] max-w-[90vw] gap-12 py-20 sm:py-28 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-16">
+          <div>
+            <p className="inline-flex rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-[#9fd8da]">
               What sets us apart
             </p>
-            <h2 className="mt-5 font-display text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
-              Boutique care. Platform-grade clarity.
+            <h2 className="mt-5 font-display text-3xl font-bold tracking-tight sm:text-4xl md:text-[2.75rem] md:leading-[1.1]">
+              Precision over volume.
             </h2>
-            <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-white/65">
-              Large platforms optimize for volume. We optimize for the transcript
-              you actually open and use—accurate, organized, and confidential.
+            <div className="mt-5 h-[3px] w-16 rounded-full bg-signal" aria-hidden="true" />
+            <p className="mt-6 max-w-md text-lg leading-relaxed text-white/65">
+              Large platforms optimize for throughput. We optimize for the
+              transcript you actually open—accurate, organized, and confidential.
             </p>
           </div>
-          <div className="mt-14 grid gap-5 md:grid-cols-3 lg:gap-6">
+
+          <ul className="divide-y divide-white/10 border-y border-white/10">
             {differentiators.map((item, index) => {
               const Icon = item.icon;
               return (
-                <article
+                <li
                   key={item.title}
-                  className="group relative flex flex-col overflow-hidden bg-white/[0.04] px-7 py-8 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:bg-paper sm:px-8 sm:py-9"
+                  className="group flex gap-5 py-7 transition-colors duration-500 first:pt-0 last:pb-0 sm:gap-6 sm:py-8"
                 >
-                  <span
-                    className="absolute inset-x-0 top-0 h-[3px] bg-signal"
-                    aria-hidden="true"
-                  />
-                  <div className="flex items-start justify-between gap-3">
-                    <span className="inline-flex size-12 items-center justify-center rounded-full border border-white/15 bg-white/5 text-signal transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:border-ink/10 group-hover:bg-signal group-hover:text-ink">
-                      <Icon className="size-5" aria-hidden />
-                    </span>
-                    <span className="font-display text-sm font-bold tracking-wide text-white/25 transition-colors duration-500 group-hover:text-mist-deep">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
+                  <span className="mt-1 font-display text-sm font-bold tracking-[0.14em] text-signal">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <span className="mt-0.5 inline-flex size-11 shrink-0 items-center justify-center rounded-full bg-white/5 text-signal transition-all duration-500 group-hover:bg-signal group-hover:text-white">
+                    <Icon className="size-5" aria-hidden />
+                  </span>
+                  <div className="min-w-0">
+                    <h3 className="font-display text-xl font-semibold tracking-tight text-white sm:text-2xl">
+                      {item.title}
+                    </h3>
+                    <p className="mt-2 text-sm leading-relaxed text-white/60 sm:text-base">
+                      {item.copy}
+                    </p>
                   </div>
-                  <h3 className="mt-6 font-display text-xl font-semibold text-white transition-colors duration-500 group-hover:text-ink sm:text-2xl">
-                    {item.title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-white/65 transition-colors duration-500 group-hover:text-mute sm:text-base">
-                    {item.copy}
-                  </p>
-                </article>
+                </li>
               );
             })}
-          </div>
+          </ul>
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-mist/35 px-5 py-24 sm:px-8 sm:py-32">
+      <section className="relative overflow-hidden bg-mist/35 py-24 sm:py-32">
         <div
           className="pointer-events-none absolute -left-20 top-16 h-56 w-56 rounded-full bg-signal/10 blur-3xl"
           aria-hidden="true"
@@ -369,11 +362,11 @@ export default function Home() {
           className="pointer-events-none absolute -right-24 bottom-10 h-64 w-64 rounded-full bg-ink-soft/10 blur-3xl"
           aria-hidden="true"
         />
-        <div className="relative mx-auto max-w-6xl">
+        <div className="relative mx-auto w-[90vw] max-w-[90vw]">
           <SectionHeading
             align="center"
             eyebrow="Use cases"
-            title="Built for the work behind the recording"
+            title="Built for the work."
             copy="From depositions to podcasts, we shape transcripts around how your team will use them next."
           />
           <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
@@ -382,24 +375,26 @@ export default function Home() {
               return (
                 <article
                   key={item.title}
-                  className="group relative flex flex-col overflow-hidden bg-paper px-6 py-7 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:bg-ink sm:px-7 sm:py-8"
+                  className="group relative flex flex-col rounded-[18px] bg-paper p-6 shadow-[0_12px_36px_rgba(6,40,88,0.07)] ring-1 ring-[var(--line)] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5 hover:shadow-[0_22px_50px_rgba(6,40,88,0.14)] hover:ring-signal/45 sm:p-7"
                 >
-                  <span
-                    className="absolute inset-x-0 top-0 h-[3px] bg-signal"
+                  <div
+                    className="absolute -inset-x-1.5 -top-1.5 bottom-3 -z-10 rounded-[18px] bg-[#a8c8d6]/30 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
                     aria-hidden="true"
                   />
-                  <div className="flex items-start justify-between gap-3">
-                    <span className="inline-flex size-12 items-center justify-center rounded-full border border-ink/10 bg-mist text-ink-soft transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:border-signal/40 group-hover:bg-signal group-hover:text-ink">
+
+                  <div className="flex items-center justify-between gap-3">
+                    <span className="inline-flex size-12 items-center justify-center rounded-full bg-mist text-ink-soft transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:bg-signal group-hover:text-white">
                       <Icon className="size-5" aria-hidden />
                     </span>
-                    <span className="font-display text-sm font-bold tracking-wide text-mist-deep transition-colors duration-500 group-hover:text-white/30">
+                    <span className="font-display text-xs font-bold tracking-[0.14em] text-mist-deep">
                       {String(index + 1).padStart(2, "0")}
                     </span>
                   </div>
-                  <h3 className="mt-5 font-display text-xl font-semibold text-ink transition-colors duration-500 group-hover:text-white">
+
+                  <h3 className="mt-5 font-display text-xl font-semibold tracking-tight text-ink">
                     {item.title}
                   </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-mute transition-colors duration-500 group-hover:text-white/65">
+                  <p className="mt-3 text-sm leading-relaxed text-mute">
                     {item.copy}
                   </p>
                 </article>
@@ -409,7 +404,7 @@ export default function Home() {
           <div className="mt-10 text-center">
             <Link
               href="/use-cases"
-              className="link-arrow text-sm font-semibold text-ink-soft hover:text-ink"
+              className="inline-flex items-center gap-2 rounded-full border border-[var(--line)] bg-paper px-5 py-2.5 text-sm font-semibold text-ink transition-all duration-300 hover:border-signal hover:bg-signal hover:text-white"
             >
               Browse industry use cases
               <ArrowRight className="size-4" aria-hidden />
@@ -422,12 +417,16 @@ export default function Home() {
 
       <GuaranteeBand />
 
-      <section className="px-5 py-24 sm:px-8 sm:py-32">
-        <div className="mx-auto max-w-6xl">
+      <section className="relative overflow-hidden bg-paper py-24 sm:py-32">
+        <div
+          className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-signal/40 to-transparent"
+          aria-hidden="true"
+        />
+        <div className="relative mx-auto w-[90vw] max-w-[90vw]">
           <SectionHeading
             align="center"
             eyebrow="Client feedback"
-            title="What our clients say"
+            title="What clients say"
             copy="Trusted for clarity under deadline—by creators, researchers, and professional teams."
           />
           <div className="mt-14">
@@ -438,32 +437,51 @@ export default function Home() {
 
       <CtaBand />
 
-      <section className="px-5 py-24 sm:px-8 sm:py-32">
-        <div className="mx-auto max-w-6xl">
+      <section className="relative overflow-hidden bg-mist/35 py-24 sm:py-32">
+        <div
+          className="pointer-events-none absolute -left-20 top-16 h-56 w-56 rounded-full bg-signal/10 blur-3xl"
+          aria-hidden="true"
+        />
+        <div
+          className="pointer-events-none absolute -right-24 bottom-10 h-64 w-64 rounded-full bg-ink-soft/10 blur-3xl"
+          aria-hidden="true"
+        />
+        <div className="relative mx-auto w-[90vw] max-w-[90vw]">
           <SectionHeading
             align="center"
             eyebrow="FAQ"
-            title="Quick answers before you send a file"
+            title="Quick answers"
+            copy="Clear replies to the questions clients ask before sending a file."
           />
-          <div className="mx-auto mt-12 max-w-3xl divide-y divide-[var(--line)] border-y border-[var(--line)]">
-            {faqs.slice(0, 5).map((item) => (
-              <details key={item.q} className="group py-6">
-                <summary className="cursor-pointer font-display text-lg font-semibold text-ink">
+          <div className="mx-auto mt-12 max-w-4xl space-y-4">
+            {faqs.slice(0, 5).map((item, index) => (
+              <details
+                key={item.q}
+                className="group rounded-[18px] bg-paper px-6 py-2 shadow-[0_12px_36px_rgba(6,40,88,0.06)] ring-1 ring-[var(--line)] transition-all duration-300 open:shadow-[0_18px_44px_rgba(6,40,88,0.1)] open:ring-signal/40 sm:px-7"
+              >
+                <summary className="cursor-pointer py-5 font-display text-lg font-semibold text-ink">
                   <span className="flex items-center justify-between gap-4">
-                    {item.q}
-                    <span className="faq-toggle text-xl text-signal">+</span>
+                    <span className="flex min-w-0 items-center gap-4">
+                      <span className="hidden shrink-0 font-display text-xs font-bold tracking-[0.14em] text-mist-deep sm:inline">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <span className="min-w-0">{item.q}</span>
+                    </span>
+                    <span className="inline-flex size-9 shrink-0 items-center justify-center rounded-full bg-mist text-lg leading-none text-ink-soft transition-all duration-300 group-open:rotate-45 group-open:bg-signal group-open:text-white">
+                      +
+                    </span>
                   </span>
                 </summary>
-                <p className="mt-3 text-base leading-relaxed text-mute">
+                <p className="border-t border-[var(--line)] pb-5 pt-4 text-base leading-relaxed text-mute sm:pl-12">
                   {item.a}
                 </p>
               </details>
             ))}
           </div>
-          <div className="mt-8 text-center">
+          <div className="mt-10 text-center">
             <Link
               href="/faq"
-              className="link-arrow text-sm font-semibold text-ink-soft hover:text-ink"
+              className="inline-flex items-center gap-2 rounded-full border border-[var(--line)] bg-paper px-5 py-2.5 text-sm font-semibold text-ink transition-all duration-300 hover:border-signal hover:bg-signal hover:text-white"
             >
               Read all FAQs
               <ArrowRight className="size-4" aria-hidden />

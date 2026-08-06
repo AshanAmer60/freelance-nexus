@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import type { LucideIcon } from "lucide-react";
@@ -27,6 +28,7 @@ import {
 } from "lucide-react";
 import { SiteLogo, navLinks } from "./brand";
 import { MobileNav } from "./mobile-nav";
+import { BackToTop } from "./back-to-top";
 
 export { SiteLogo, navLinks } from "./brand";
 
@@ -36,6 +38,8 @@ export const services: {
   summary: string;
   details: string;
   outcomes: string[];
+  image: string;
+  imageAlt: string;
   icon: LucideIcon;
 }[] = [
   {
@@ -46,6 +50,9 @@ export const services: {
     details:
       "Clean-read or verbatim. Built for podcasts, interviews, legal sessions, lectures, and meetings where accuracy and usability both matter.",
     outcomes: ["Speaker labels", "Timestamps", "DOCX / TXT / SRT"],
+    image:
+      "https://images.unsplash.com/photo-1478737270239-2f02b77fc618?auto=format&fit=crop&w=1200&q=80",
+    imageAlt: "Podcast microphone and recording setup on a desk",
     icon: FileText,
   },
   {
@@ -56,6 +63,9 @@ export const services: {
     details:
       "Ideal for multilingual interviews, documents, and content that needs careful handling rather than machine-only output.",
     outcomes: ["Context preserved", "Terminology care", "Publish-ready text"],
+    image:
+      "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=1200&q=80",
+    imageAlt: "Notebook and pen for careful language and writing work",
     icon: Languages,
   },
   {
@@ -66,6 +76,9 @@ export const services: {
     details:
       "Better source audio means better transcripts. We help clients prepare recordings that reduce guesswork and rework.",
     outcomes: ["Cleaner input", "Fewer revisions", "Faster delivery"],
+    image:
+      "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=1200&q=80",
+    imageAlt: "Studio microphone ready for a clean recording session",
     icon: Mic,
   },
 ];
@@ -252,7 +265,7 @@ export const guarantees = [
 
 export const studioStory = {
   eyebrow: "The studio",
-  title: "Not a ticket queue. A transcription studio.",
+  title: "A transcription studio.",
   copy: "Freelance Nexus is built for clients who want direct communication and finished text they can actually use—publish, cite, file, or share. Based near Adyala Road, RWP, we work with creators, researchers, and professionals locally and online.",
   points: [
     "Boutique handling instead of mass-upload anonymity",
@@ -351,56 +364,65 @@ export function SiteHeader({
     : "text-mute hover:text-ink";
 
   return (
-    <header
-      className={
-        solid
-          ? "relative z-30 border-b border-[var(--line)] bg-paper/95 backdrop-blur-md"
-          : "absolute inset-x-0 top-0 z-30"
-      }
-    >
-      <nav className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3.5 sm:px-8 sm:py-4">
-        <Link
-          href="/"
-          className={`group flex items-center gap-3 font-display text-sm font-semibold tracking-wide sm:text-base ${
-            dark && !solid ? "text-white" : "text-ink"
-          }`}
-        >
-          <SiteLogo
-            size={44}
-            priority
-            className="rounded-full ring-1 ring-black/5"
-          />
-          <span
-            className={`hidden transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:inline ${
-              solid
-                ? "group-hover:text-ink-soft"
-                : "group-hover:text-signal"
+    <>
+      <header
+        className={
+          solid
+            ? "fixed inset-x-0 top-0 z-50 border-b border-[var(--line)]/60 bg-paper/60 backdrop-blur-xl"
+            : "fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-ink/40 backdrop-blur-xl"
+        }
+      >
+        <nav className="relative mx-auto flex w-[90vw] max-w-[90vw] items-center justify-between py-3.5 sm:py-4">
+          <Link
+            href="/"
+            className={`group flex items-center gap-3 font-display text-sm font-semibold tracking-wide sm:text-base ${
+              dark && !solid ? "text-white" : "text-ink"
             }`}
           >
-            Freelance Nexus
-          </span>
-        </Link>
-        <div className="flex items-center gap-3 text-sm sm:gap-4 lg:gap-5">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={`nav-link hidden md:inline ${textClass}`}
+            <SiteLogo
+              size={44}
+              priority
+              className="rounded-full ring-1 ring-black/5"
+            />
+            <span
+              className={`hidden transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:inline ${
+                solid
+                  ? "group-hover:text-ink-soft"
+                  : "group-hover:text-signal"
+              }`}
             >
-              {link.label}
-            </Link>
-          ))}
-          <Link
-            href="/contact"
-            className="btn-primary hidden px-4 py-2 text-sm md:inline-flex"
-          >
-            Get a quote
-            <ArrowRight className="btn-arrow size-4" aria-hidden />
+              Freelance Nexus
+            </span>
           </Link>
-          <MobileNav dark={dark && !solid} />
-        </div>
-      </nav>
-    </header>
+
+          <div className="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 items-center gap-4 text-sm lg:gap-6 md:flex">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`nav-link ${textClass}`}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
+
+          <div className="flex items-center gap-3">
+            <Link
+              href="/contact"
+              className="group hidden items-center justify-center gap-2 rounded-full bg-signal px-4 py-2 text-sm font-semibold text-white transition duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:bg-[#0a3d7a] hover:text-white md:inline-flex"
+            >
+              Get a quote
+              <ArrowRight className="size-4 transition group-hover:translate-x-1" aria-hidden />
+            </Link>
+            <MobileNav dark={dark && !solid} />
+          </div>
+        </nav>
+      </header>
+      {solid ? (
+        <div className="h-[4.5rem] shrink-0 sm:h-[4.75rem]" aria-hidden="true" />
+      ) : null}
+    </>
   );
 }
 
@@ -417,12 +439,23 @@ export function SiteFooter() {
         className="pointer-events-none absolute -right-16 bottom-0 h-64 w-64 rounded-full bg-signal/15 blur-3xl"
         aria-hidden
       />
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.035]"
+        aria-hidden
+        style={{
+          backgroundImage:
+            "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
+        }}
+      />
 
-      <div className="relative mx-auto max-w-6xl px-5 pt-16 pb-8 sm:px-8 sm:pt-20">
-        <div className="grid gap-12 lg:grid-cols-[1.35fr_1fr_1fr_1.1fr] lg:gap-10">
-          <div className="group max-w-sm">
-            <Link href="/" className="inline-flex items-center gap-3">
-              <SiteLogo size={56} className="ring-1 ring-white/10" />
+      <div className="relative mx-auto w-[90vw] max-w-[90vw] pt-16 pb-8 sm:pt-20">
+        <div className="grid gap-12 lg:grid-cols-[1.35fr_1fr_1fr_1.15fr] lg:gap-10">
+          <div className="max-w-sm">
+            <Link href="/" className="group inline-flex items-center gap-3">
+              <SiteLogo
+                size={52}
+                className="rounded-full ring-1 ring-white/10"
+              />
               <span className="font-display text-lg font-semibold tracking-tight">
                 Freelance Nexus
               </span>
@@ -431,21 +464,27 @@ export function SiteFooter() {
               Human-reviewed transcription, translation, and recording support.
               Boutique care for work that has to be right.
             </p>
-            <div className="mt-6 flex items-start gap-2.5 text-sm text-white/55">
-              <MapPin className="mt-0.5 size-4 shrink-0 text-signal" aria-hidden />
-              <span>Adyala Road, RWP</span>
+            <div className="mt-6 space-y-3">
+              <div className="flex items-start gap-2.5 text-sm text-white/55">
+                <span className="inline-flex size-8 shrink-0 items-center justify-center rounded-full bg-white/5 text-signal">
+                  <MapPin className="size-3.5" aria-hidden />
+                </span>
+                <span className="pt-1.5">Adyala Road, RWP</span>
+              </div>
+              <a
+                href="mailto:hello@freelancenexus.com"
+                className="inline-flex items-center gap-2.5 text-sm text-white/55 transition-colors duration-300 hover:text-signal"
+              >
+                <span className="inline-flex size-8 shrink-0 items-center justify-center rounded-full bg-white/5 text-signal">
+                  <Mail className="size-3.5" aria-hidden />
+                </span>
+                hello@freelancenexus.com
+              </a>
             </div>
-            <a
-              href="mailto:hello@freelancenexus.com"
-              className="mt-3 inline-flex items-center gap-2.5 text-sm text-white/55 transition-colors duration-500 hover:text-signal"
-            >
-              <Mail className="size-4 shrink-0 text-signal" aria-hidden />
-              hello@freelancenexus.com
-            </a>
           </div>
 
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-signal">
+            <p className="inline-flex rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-[#9fd8da]">
               Explore
             </p>
             <div className="mt-5 flex flex-col gap-3 text-sm text-white/65">
@@ -453,66 +492,67 @@ export function SiteFooter() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="link-arrow w-fit transition-colors duration-500 hover:text-white"
+                  className="w-fit transition-colors duration-300 hover:text-signal"
                 >
                   {link.label}
-                  <ArrowRight className="size-3.5 text-signal/80" aria-hidden />
                 </Link>
               ))}
             </div>
           </div>
 
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-signal">
+            <p className="inline-flex rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-[#9fd8da]">
               Studio
             </p>
             <div className="mt-5 flex flex-col gap-3 text-sm text-white/65">
               <Link
                 href="/about"
-                className="link-arrow w-fit transition-colors duration-500 hover:text-white"
+                className="w-fit transition-colors duration-300 hover:text-signal"
               >
                 About
-                <ArrowRight className="size-3.5 text-signal/80" aria-hidden />
               </Link>
               <Link
                 href="/sample"
-                className="link-arrow w-fit transition-colors duration-500 hover:text-white"
+                className="w-fit transition-colors duration-300 hover:text-signal"
               >
                 Sample transcript
-                <ArrowRight className="size-3.5 text-signal/80" aria-hidden />
               </Link>
               <Link
                 href="/services"
-                className="link-arrow w-fit transition-colors duration-500 hover:text-white"
+                className="w-fit transition-colors duration-300 hover:text-signal"
               >
                 Transcription
-                <ArrowRight className="size-3.5 text-signal/80" aria-hidden />
               </Link>
               <Link
                 href="/services"
-                className="link-arrow w-fit transition-colors duration-500 hover:text-white"
+                className="w-fit transition-colors duration-300 hover:text-signal"
               >
                 Translation
-                <ArrowRight className="size-3.5 text-signal/80" aria-hidden />
               </Link>
             </div>
           </div>
 
-          <div className="border border-white/10 bg-white/[0.04] p-6 backdrop-blur-sm">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-signal">
+          <div className="rounded-[20px] border border-white/10 bg-white/[0.04] p-6 shadow-[0_16px_40px_rgba(0,0,0,0.2)] backdrop-blur-sm">
+            <p className="inline-flex rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-[#9fd8da]">
               Start a project
             </p>
             <p className="mt-4 text-sm leading-relaxed text-white/65">
               Share length, speakers, deadline, and format for a clear quote.
             </p>
-            <Link href="/contact" className="btn-primary mt-6 w-full px-5 py-3 text-sm">
+            <Link
+              href="/contact"
+              className="group mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-signal px-5 py-3 text-sm font-semibold text-ink transition duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:bg-paper"
+            >
               Request a quote
-              <ArrowRight className="btn-arrow size-4" aria-hidden />
+              <ArrowRight
+                className="size-4 transition group-hover:translate-x-1"
+                aria-hidden
+              />
             </Link>
             <a
               href="/sample-transcript.txt"
               download
-              className="link-arrow mt-4 text-sm text-white/55 hover:text-signal"
+              className="mt-4 inline-flex items-center gap-2 text-sm text-white/55 transition-colors duration-300 hover:text-signal"
             >
               Download sample
               <ArrowRight className="size-3.5" aria-hidden />
@@ -545,6 +585,7 @@ export function PageFrame({
       {hero}
       <main>{children}</main>
       <SiteFooter />
+      <BackToTop />
     </div>
   );
 }
@@ -574,12 +615,12 @@ export function InteriorHero({
             "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
         }}
       />
-      <div className="relative mx-auto grid min-h-[62svh] max-w-6xl gap-10 px-5 pb-16 pt-28 sm:px-8 sm:pb-20 lg:grid-cols-[1fr_0.85fr] lg:items-end">
+      <div className="relative mx-auto grid min-h-[62svh] w-[90vw] max-w-[90vw] gap-10 pb-16 pt-28 sm:pb-20 lg:grid-cols-[1fr_0.85fr] lg:items-end">
         <div className="max-w-2xl">
-          <p className="anim-rise inline-flex border border-white/15 bg-white/5 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-white/70">
+          <p className="anim-rise inline-flex rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-white/70">
             {eyebrow}
           </p>
-          <h1 className="anim-rise anim-rise-delay-1 mt-5 font-display text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
+          <h1 className="anim-rise anim-rise-delay-1 mt-5 font-display text-4xl font-bold tracking-tight sm:text-5xl md:text-[3.25rem] md:leading-[1.08]">
             {title}
           </h1>
           <div className="accent-rule mt-5" />
@@ -587,13 +628,19 @@ export function InteriorHero({
             {copy}
           </p>
           <div className="anim-rise anim-rise-delay-3 mt-8 flex flex-wrap gap-3">
-            <Link href={primaryCta.href} className="btn-primary px-6 py-3.5 text-sm">
+            <Link
+              href={primaryCta.href}
+              className="group inline-flex items-center justify-center gap-2 rounded-full bg-signal px-6 py-3.5 text-sm font-semibold text-ink transition duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:bg-paper"
+            >
               {primaryCta.label}
-              <ArrowRight className="btn-arrow size-4" aria-hidden />
+              <ArrowRight
+                className="size-4 transition group-hover:translate-x-1"
+                aria-hidden
+              />
             </Link>
             <Link
               href={secondaryCta.href}
-              className="btn-secondary px-6 py-3.5 text-sm"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white transition duration-500 hover:border-signal hover:bg-signal hover:text-ink"
             >
               {secondaryCta.label}
             </Link>
@@ -612,25 +659,27 @@ export function SectionHeading({
   title,
   copy,
   align = "left",
+  titleClassName = "",
 }: {
   eyebrow: string;
   title: string;
   copy?: string;
   align?: "left" | "center";
+  titleClassName?: string;
 }) {
   const centered = align === "center";
 
   return (
-    <div className={centered ? "mx-auto max-w-3xl text-center" : "max-w-3xl"}>
+    <div className={centered ? "mx-auto w-full text-center" : "max-w-3xl"}>
       <p
-        className={`inline-flex items-center border border-ink-soft/20 bg-ink-soft/10 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-ink-soft`}
+        className={`inline-flex items-center rounded-full border border-ink-soft/20 bg-ink-soft/10 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-ink-soft`}
       >
         {eyebrow}
       </p>
       <h2
         className={`mt-5 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl md:text-[2.75rem] md:leading-[1.1] ${
           centered ? "mx-auto" : ""
-        }`}
+        } ${titleClassName}`}
       >
         {title}
       </h2>
@@ -691,23 +740,31 @@ export function ProofStrip({ dark = false }: { dark?: boolean }) {
 export function Testimonials() {
   return (
     <div className="grid gap-6 md:grid-cols-3">
-      {testimonials.map((item) => (
+      {testimonials.map((item, index) => (
         <figure
           key={item.name}
-          className="card-lift border border-[var(--line)] bg-paper/80 p-7 shadow-[0_18px_60px_rgba(6,40,88,0.05)]"
+          className="group relative flex flex-col rounded-[18px] bg-paper p-7 shadow-[0_12px_36px_rgba(6,40,88,0.07)] ring-1 ring-[var(--line)] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5 hover:shadow-[0_22px_50px_rgba(6,40,88,0.14)] hover:ring-signal/45 sm:p-8"
         >
-          <Quote
-            className="quote-mark size-7 text-ink-soft/70"
-            aria-hidden
+          <div
+            className="absolute -inset-x-1.5 -top-1.5 bottom-3 -z-10 rounded-[18px] bg-[#a8c8d6]/30 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+            aria-hidden="true"
           />
-          <blockquote className="mt-4 text-base leading-relaxed text-ink">
+          <div className="flex items-center justify-between gap-3">
+            <span className="inline-flex size-11 items-center justify-center rounded-full bg-mist text-ink-soft transition-all duration-500 group-hover:bg-signal group-hover:text-white">
+              <Quote className="size-5" aria-hidden />
+            </span>
+            <span className="font-display text-xs font-bold tracking-[0.14em] text-mist-deep">
+              {String(index + 1).padStart(2, "0")}
+            </span>
+          </div>
+          <blockquote className="mt-6 flex-1 text-base leading-relaxed text-ink">
             “{item.quote}”
           </blockquote>
-          <figcaption className="mt-6">
+          <figcaption className="mt-7 border-t border-[var(--line)] pt-5">
             <p className="font-display text-sm font-semibold text-ink">
               {item.name}
             </p>
-            <p className="text-sm text-mute">{item.role}</p>
+            <p className="mt-1 text-sm text-mute">{item.role}</p>
           </figcaption>
         </figure>
       ))}
@@ -741,7 +798,7 @@ export function FeatureCheck({
 
 export function StudioStory() {
   return (
-    <section className="relative overflow-hidden bg-paper px-5 py-24 sm:px-8 sm:py-32">
+    <section className="relative overflow-hidden bg-paper py-24 sm:py-32">
       <div
         className="pointer-events-none absolute -right-24 top-20 h-64 w-64 rounded-full bg-ink-soft/10 blur-3xl"
         aria-hidden="true"
@@ -750,7 +807,7 @@ export function StudioStory() {
         className="pointer-events-none absolute -left-20 bottom-10 h-56 w-56 rounded-full bg-signal/10 blur-3xl"
         aria-hidden="true"
       />
-      <div className="relative mx-auto grid max-w-6xl gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-16">
+      <div className="relative mx-auto grid w-[90vw] max-w-[90vw] gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-16">
         <div>
           <SectionHeading
             eyebrow={studioStory.eyebrow}
@@ -760,7 +817,7 @@ export function StudioStory() {
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
               href="/about"
-              className="group inline-flex items-center justify-center gap-2 bg-ink px-6 py-3 text-sm font-semibold text-paper transition duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:bg-ink-soft"
+              className="group inline-flex items-center justify-center gap-2 rounded-full bg-ink px-6 py-3 text-sm font-semibold text-paper transition duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:bg-ink-soft"
             >
               Our story
               <ArrowRight
@@ -768,7 +825,7 @@ export function StudioStory() {
                 aria-hidden
               />
             </Link>
-            <DownloadSampleLink className="inline-flex items-center gap-2 border border-[var(--line)] bg-mist/40 px-6 py-3 text-sm font-medium text-ink transition duration-500 hover:border-signal hover:bg-paper" />
+            <DownloadSampleLink className="inline-flex items-center gap-2 rounded-full border border-[var(--line)] bg-mist/40 px-6 py-3 text-sm font-medium text-ink transition duration-500 hover:border-signal hover:bg-signal" />
           </div>
         </div>
 
@@ -776,17 +833,17 @@ export function StudioStory() {
           {studioStory.points.map((point, index) => (
             <li
               key={point}
-              className="group relative overflow-hidden bg-mist/50 px-6 py-6 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:bg-ink sm:px-7"
+              className="group relative rounded-[18px] bg-paper px-6 py-6 shadow-[0_12px_36px_rgba(6,40,88,0.07)] ring-1 ring-[var(--line)] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:shadow-[0_22px_50px_rgba(6,40,88,0.14)] hover:ring-signal/45 sm:px-7"
             >
-              <span
-                className="absolute inset-y-0 left-0 w-[3px] bg-signal"
+              <div
+                className="absolute -inset-x-1.5 -top-1.5 bottom-2.5 -z-10 rounded-[18px] bg-[#a8c8d6]/30 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
                 aria-hidden="true"
               />
               <div className="flex items-start gap-4">
-                <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-full border border-ink/10 bg-paper font-display text-sm font-bold text-ink-soft transition-all duration-500 group-hover:border-signal/40 group-hover:bg-signal group-hover:text-ink">
+                <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-full bg-mist font-display text-sm font-bold text-ink-soft transition-all duration-500 group-hover:bg-signal group-hover:text-white">
                   {String(index + 1).padStart(2, "0")}
                 </span>
-                <p className="pt-1.5 text-base leading-relaxed text-ink transition-colors duration-500 group-hover:text-white">
+                <p className="pt-1.5 text-base leading-relaxed text-ink">
                   {point}
                 </p>
               </div>
@@ -800,7 +857,7 @@ export function StudioStory() {
 
 export function GuaranteeBand() {
   return (
-    <section className="relative overflow-hidden bg-mist/35 px-5 py-24 sm:px-8 sm:py-32">
+    <section className="relative overflow-hidden bg-mist/35 py-24 sm:py-32">
       <div
         className="pointer-events-none absolute -left-24 top-16 h-64 w-64 rounded-full bg-signal/10 blur-3xl"
         aria-hidden="true"
@@ -809,26 +866,43 @@ export function GuaranteeBand() {
         className="pointer-events-none absolute -right-20 bottom-10 h-56 w-56 rounded-full bg-ink-soft/10 blur-3xl"
         aria-hidden="true"
       />
-      <div className="relative mx-auto max-w-6xl">
-        <div className="grid gap-5 lg:grid-cols-[0.95fr_1.05fr] lg:gap-6 lg:items-stretch">
-          <div className="relative overflow-hidden bg-ink px-8 py-12 text-white sm:px-10 sm:py-14">
-            <span
-              className="absolute inset-x-0 top-0 h-[3px] bg-signal"
+      <div className="relative mx-auto w-[90vw] max-w-[90vw]">
+        <div className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr] lg:items-stretch lg:gap-6">
+          <div className="relative overflow-hidden rounded-[22px] bg-ink px-8 py-12 text-white shadow-[0_16px_48px_rgba(6,40,88,0.28)] sm:px-10 sm:py-14">
+            <Image
+              src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=1400&q=80"
+              alt=""
+              fill
+              sizes="(max-width: 1024px) 90vw, 40vw"
+              className="object-cover object-center"
               aria-hidden="true"
             />
-            <p className="inline-flex border border-white/15 bg-white/5 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-[#9fd8da]">
+            <div
+              className="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#062858]/92 via-[#062858]/88 to-[#047b7f]/75"
+              aria-hidden="true"
+            />
+            <div
+              className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-signal/20 blur-3xl"
+              aria-hidden="true"
+            />
+            <p className="relative inline-flex rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-[#9fd8da]">
               Our promise
             </p>
-            <h2 className="mt-5 font-display text-3xl font-bold tracking-tight sm:text-4xl">
-              Publish-ready transcripts. Human-reviewed before delivery.
+            <h2 className="relative mt-5 font-display text-3xl font-bold tracking-tight sm:text-4xl">
+              Publish-ready transcripts.
             </h2>
-            <p className="mt-5 text-base leading-relaxed text-white/65">
-              Typical turnaround is 24–72 hours depending on length and
-              complexity. If we miss the agreed brief, we revise.
+            <div
+              className="relative mt-5 h-[3px] w-16 rounded-full bg-signal"
+              aria-hidden="true"
+            />
+            <p className="relative mt-5 text-base leading-relaxed text-white/65">
+              Human-reviewed before delivery. Typical turnaround is 24–72 hours
+              depending on length and complexity. If we miss the agreed brief, we
+              revise.
             </p>
             <Link
               href="/contact"
-              className="group mt-8 inline-flex items-center justify-center gap-2 bg-signal px-6 py-3 text-sm font-semibold text-ink transition duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:bg-paper"
+              className="group relative mt-8 inline-flex items-center justify-center gap-2 rounded-full bg-signal px-6 py-3 text-sm font-semibold text-ink transition duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:bg-paper"
             >
               Get a free quote
               <ArrowRight
@@ -842,26 +916,26 @@ export function GuaranteeBand() {
             {guarantees.map((item, index) => (
               <li
                 key={item.title}
-                className="group relative overflow-hidden bg-paper px-6 py-6 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:bg-ink sm:px-7 sm:py-7"
+                className="group relative rounded-[18px] bg-paper px-6 py-6 shadow-[0_12px_36px_rgba(6,40,88,0.07)] ring-1 ring-[var(--line)] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:shadow-[0_22px_50px_rgba(6,40,88,0.14)] hover:ring-signal/45 sm:px-7 sm:py-7"
               >
-                <span
-                  className="absolute inset-x-0 top-0 h-[3px] bg-signal"
+                <div
+                  className="absolute -inset-x-1.5 -top-1.5 bottom-2.5 -z-10 rounded-[18px] bg-[#a8c8d6]/30 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
                   aria-hidden="true"
                 />
                 <div className="flex items-start gap-4">
-                  <span className="inline-flex size-11 shrink-0 items-center justify-center rounded-full border border-ink/10 bg-mist text-ink-soft transition-all duration-500 group-hover:border-signal/40 group-hover:bg-signal group-hover:text-ink">
+                  <span className="inline-flex size-11 shrink-0 items-center justify-center rounded-full bg-mist text-ink-soft transition-all duration-500 group-hover:bg-signal group-hover:text-white">
                     <BadgeCheck className="size-5" aria-hidden />
                   </span>
                   <div className="min-w-0 flex-1">
                     <div className="flex items-start justify-between gap-3">
-                      <h3 className="font-display text-xl font-semibold text-ink transition-colors duration-500 group-hover:text-white">
+                      <h3 className="font-display text-xl font-semibold tracking-tight text-ink">
                         {item.title}
                       </h3>
-                      <span className="shrink-0 font-display text-sm font-bold tracking-wide text-mist-deep transition-colors duration-500 group-hover:text-white/30">
+                      <span className="shrink-0 font-display text-xs font-bold tracking-[0.14em] text-mist-deep">
                         {String(index + 1).padStart(2, "0")}
                       </span>
                     </div>
-                    <p className="mt-2 text-sm leading-relaxed text-mute transition-colors duration-500 group-hover:text-white/65">
+                    <p className="mt-2 text-sm leading-relaxed text-mute">
                       {item.copy}
                     </p>
                   </div>
@@ -876,38 +950,64 @@ export function GuaranteeBand() {
 }
 
 export function CtaBand({
-  title = "Ready to get started?",
+  title = "Let’s start your file.",
   copy = "Partner with a boutique transcription studio for accurate, confidential, human-reviewed delivery. Share your brief and we’ll reply with a clear quote.",
 }: {
   title?: string;
   copy?: string;
 }) {
   return (
-    <section className="relative w-full overflow-hidden bg-ink px-5 py-16 text-white sm:px-8 sm:py-24 lg:py-28">
-      <div
-        className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-signal/25 blur-3xl soft-pulse"
-        aria-hidden
-      />
-      <div
-        className="pointer-events-none absolute bottom-0 left-0 h-48 w-48 rounded-full bg-ink-soft/40 blur-3xl"
-        aria-hidden
-      />
-      <div className="relative mx-auto flex w-full max-w-6xl flex-col items-start gap-8 lg:flex-row lg:items-end lg:justify-between">
-        <div className="max-w-2xl">
-          <h2 className="font-display text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
-            {title}
-          </h2>
-          <p className="mt-5 text-lg leading-relaxed text-white/65">{copy}</p>
-        </div>
-        <div className="flex flex-wrap gap-3">
-          <Link href="/contact" className="btn-primary px-8 py-3.5 text-sm">
-            Request a quote
-            <ArrowRight className="btn-arrow size-4" aria-hidden />
-          </Link>
-          <DownloadSampleLink
-            className="btn-secondary px-8 py-3.5 text-sm"
-            label="Download a sample"
+    <section className="relative w-full overflow-hidden bg-paper py-16 sm:py-24 lg:py-28">
+      <div className="relative mx-auto w-[90vw] max-w-[90vw]">
+        <div className="relative overflow-hidden rounded-[28px] bg-ink px-8 py-14 text-white shadow-[0_24px_70px_rgba(6,40,88,0.28)] sm:px-12 sm:py-16 lg:px-16 lg:py-20">
+          <div
+            className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-signal/25 blur-3xl soft-pulse"
+            aria-hidden
           />
+          <div
+            className="pointer-events-none absolute -bottom-28 -left-16 h-64 w-64 rounded-full bg-ink-soft/45 blur-3xl"
+            aria-hidden
+          />
+          <div
+            className="pointer-events-none absolute inset-0 opacity-[0.05]"
+            aria-hidden
+            style={{
+              backgroundImage:
+                "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
+            }}
+          />
+
+          <div className="relative mx-auto max-w-3xl text-center">
+            <p className="inline-flex rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-[#9fd8da]">
+              Next step
+            </p>
+            <h2 className="mt-5 font-display text-3xl font-bold tracking-tight sm:text-4xl md:text-[2.85rem] md:leading-[1.1]">
+              {title}
+            </h2>
+            <div
+              className="mx-auto mt-5 h-[3px] w-16 rounded-full bg-signal"
+              aria-hidden="true"
+            />
+            <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-white/65">
+              {copy}
+            </p>
+            <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
+              <Link
+                href="/contact"
+                className="group inline-flex cursor-pointer items-center justify-center gap-2 rounded-full bg-signal px-7 py-3.5 text-sm font-semibold text-ink transition duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:bg-paper"
+              >
+                Request a quote
+                <ArrowRight
+                  className="size-4 transition group-hover:translate-x-1"
+                  aria-hidden
+                />
+              </Link>
+              <DownloadSampleLink
+                className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-white/20 bg-white/5 px-7 py-3.5 text-sm font-semibold text-white transition duration-500 hover:border-signal hover:bg-signal hover:text-ink"
+                label="Download a sample"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </section>

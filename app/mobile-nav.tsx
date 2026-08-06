@@ -34,10 +34,10 @@ export function MobileNav({ dark = false }: { dark?: boolean }) {
         aria-expanded={open}
         aria-controls="mobile-menu"
         onClick={() => setOpen((value) => !value)}
-        className={`relative z-50 inline-flex size-11 items-center justify-center border transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+        className={`relative z-[70] inline-flex size-11 items-center justify-center border transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
           dark
-            ? "border-white/25 text-white hover:border-white/50 hover:bg-white/10"
-            : "border-[var(--line)] text-ink hover:border-signal hover:bg-signal/10"
+            ? "border-white/25 bg-ink/40 text-white hover:border-white/50 hover:bg-white/10"
+            : "border-[var(--line)] bg-paper/90 text-ink hover:border-signal hover:bg-signal/10"
         }`}
       >
         <span className="relative size-5">
@@ -57,7 +57,7 @@ export function MobileNav({ dark = false }: { dark?: boolean }) {
       </button>
 
       <div
-        className={`fixed inset-0 z-40 bg-ink/50 backdrop-blur-sm transition-opacity duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+        className={`fixed inset-0 z-[60] h-[100dvh] min-h-[100svh] bg-ink/60 backdrop-blur-md transition-opacity duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
           open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
         }`}
         onClick={() => setOpen(false)}
@@ -69,11 +69,11 @@ export function MobileNav({ dark = false }: { dark?: boolean }) {
         role="dialog"
         aria-modal="true"
         aria-label="Mobile navigation"
-        className={`fixed inset-y-0 right-0 z-40 flex w-[min(100%,20rem)] flex-col bg-paper shadow-[-20px_0_60px_rgba(6,40,88,0.18)] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+        className={`fixed top-0 right-0 z-[60] flex h-[100dvh] max-h-[100dvh] min-h-[100svh] w-[80vw] flex-col bg-[#fdfdfd] shadow-[-20px_0_60px_rgba(6,40,88,0.22)] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
           open ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="flex items-center justify-between border-b border-[var(--line)] px-5 py-5">
+        <div className="flex items-center justify-between border-b border-[var(--line)] bg-[#fdfdfd] px-5 py-5">
           <Link
             href="/"
             onClick={() => setOpen(false)}
@@ -88,7 +88,7 @@ export function MobileNav({ dark = false }: { dark?: boolean }) {
           </Link>
         </div>
 
-        <nav className="flex flex-1 flex-col gap-1 px-3 py-6">
+        <nav className="flex flex-1 flex-col gap-1 overflow-y-auto bg-[#fdfdfd] px-3 py-6">
           {navLinks.map((link, index) => (
             <Link
               key={link.href}
@@ -115,7 +115,7 @@ export function MobileNav({ dark = false }: { dark?: boolean }) {
           </Link>
         </nav>
 
-        <div className="border-t border-[var(--line)] p-5">
+        <div className="border-t border-[var(--line)] bg-[#fdfdfd] p-5">
           <Link
             href="/contact"
             onClick={() => setOpen(false)}

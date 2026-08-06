@@ -39,6 +39,13 @@
   box-sizing: border-box;
 }
 
+@media (pointer: fine) {
+  #home-hero-stage.hero-cursor-active,
+  #home-hero-stage.hero-cursor-active * {
+    cursor: none !important;
+  }
+}
+
 html {
   scroll-behavior: smooth;
 }
