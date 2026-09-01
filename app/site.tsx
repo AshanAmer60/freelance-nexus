@@ -28,7 +28,7 @@ import {
 } from "lucide-react";
 import { SiteLogo, navLinks } from "./brand";
 import { MobileNav } from "./mobile-nav";
-import { BackToTop } from "./back-to-top";
+import { SiteHeaderNav } from "./site-header-nav";
 
 export { SiteLogo, navLinks } from "./brand";
 
@@ -49,7 +49,7 @@ export const services: {
       "Human-reviewed transcripts with speaker labels, timestamps, and clean formatting for publishing, research, and records.",
     details:
       "Clean-read or verbatim. Built for podcasts, interviews, legal sessions, lectures, and meetings where accuracy and usability both matter.",
-    outcomes: ["Speaker labels", "Timestamps", "DOCX / TXT / SRT"],
+    outcomes: ["Speaker labels", "Timestamps", "Docx, TXT, and SRT"],
     image:
       "https://images.unsplash.com/photo-1478737270239-2f02b77fc618?auto=format&fit=crop&w=1200&q=80",
     imageAlt: "Podcast microphone and recording setup on a desk",
@@ -205,6 +205,43 @@ export const proofPoints: {
   { label: "Formats", value: "DOCX · TXT · SRT", icon: Files },
 ];
 
+export const platforms: {
+  name: string;
+  focus: string;
+  logo: string;
+}[] = [
+  {
+    name: "DataPlus",
+    focus: "Speech annotation",
+    logo: "/platforms/dataplus.png",
+  },
+  {
+    name: "AIDI",
+    focus: "Transcription workflows",
+    logo: "/platforms/aidi.svg",
+  },
+  {
+    name: "Appen",
+    focus: "Data labeling",
+    logo: "/platforms/appen.png",
+  },
+  {
+    name: "OneForma",
+    focus: "Audio projects",
+    logo: "/platforms/oneforma.png",
+  },
+  {
+    name: "Magic Data",
+    focus: "Speech datasets",
+    logo: "/platforms/magicdata.png",
+  },
+  {
+    name: "Loft",
+    focus: "Speech data ops",
+    logo: "/platforms/loft.svg",
+  },
+];
+
 export const differentiators: {
   title: string;
   copy: string;
@@ -347,7 +384,10 @@ export function DownloadSampleLink({
   return (
     <a href="/sample-transcript.txt" download className={className}>
       {label}
-      <ArrowRight className="btn-arrow size-4" aria-hidden />
+      <ArrowRight
+        className="btn-arrow size-4 transition-transform duration-300 group-hover:translate-x-1"
+        aria-hidden
+      />
     </a>
   );
 }
@@ -359,10 +399,6 @@ export function SiteHeader({
   dark?: boolean;
   solid?: boolean;
 }) {
-  const textClass = dark && !solid
-    ? "text-white/75 hover:text-white"
-    : "text-mute hover:text-ink";
-
   return (
     <>
       <header
@@ -395,22 +431,12 @@ export function SiteHeader({
             </span>
           </Link>
 
-          <div className="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 items-center gap-4 text-sm lg:gap-6 md:flex">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`nav-link ${textClass}`}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </div>
+          <SiteHeaderNav dark={dark && !solid} />
 
           <div className="flex items-center gap-3">
             <Link
               href="/contact"
-              className="group hidden items-center justify-center gap-2 rounded-full bg-signal px-4 py-2 text-sm font-semibold text-white transition duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:bg-[#0a3d7a] hover:text-white md:inline-flex"
+              className="btn btn-solid group hidden md:inline-flex"
             >
               Get a quote
               <ArrowRight className="size-4 transition group-hover:translate-x-1" aria-hidden />
@@ -449,7 +475,7 @@ export function SiteFooter() {
       />
 
       <div className="relative mx-auto w-[90vw] max-w-[90vw] pt-16 pb-8 sm:pt-20">
-        <div className="grid gap-12 lg:grid-cols-[1.35fr_1fr_1fr_1.15fr] lg:gap-10">
+        <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1.1fr] lg:gap-10">
           <div className="max-w-sm">
             <Link href="/" className="group inline-flex items-center gap-3">
               <SiteLogo
@@ -464,23 +490,6 @@ export function SiteFooter() {
               Human-reviewed transcription, translation, and recording support.
               Boutique care for work that has to be right.
             </p>
-            <div className="mt-6 space-y-3">
-              <div className="flex items-start gap-2.5 text-sm text-white/55">
-                <span className="inline-flex size-8 shrink-0 items-center justify-center rounded-full bg-white/5 text-signal">
-                  <MapPin className="size-3.5" aria-hidden />
-                </span>
-                <span className="pt-1.5">Adyala Road, RWP</span>
-              </div>
-              <a
-                href="mailto:hello@freelancenexus.com"
-                className="inline-flex items-center gap-2.5 text-sm text-white/55 transition-colors duration-300 hover:text-signal"
-              >
-                <span className="inline-flex size-8 shrink-0 items-center justify-center rounded-full bg-white/5 text-signal">
-                  <Mail className="size-3.5" aria-hidden />
-                </span>
-                hello@freelancenexus.com
-              </a>
-            </div>
           </div>
 
           <div>
@@ -532,31 +541,27 @@ export function SiteFooter() {
             </div>
           </div>
 
-          <div className="rounded-[20px] border border-white/10 bg-white/[0.04] p-6 shadow-[0_16px_40px_rgba(0,0,0,0.2)] backdrop-blur-sm">
+          <div>
             <p className="inline-flex rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-[#9fd8da]">
-              Start a project
+              Contact
             </p>
-            <p className="mt-4 text-sm leading-relaxed text-white/65">
-              Share length, speakers, deadline, and format for a clear quote.
-            </p>
-            <Link
-              href="/contact"
-              className="group mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-signal px-5 py-3 text-sm font-semibold text-ink transition duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:bg-paper"
-            >
-              Request a quote
-              <ArrowRight
-                className="size-4 transition group-hover:translate-x-1"
-                aria-hidden
-              />
-            </Link>
-            <a
-              href="/sample-transcript.txt"
-              download
-              className="mt-4 inline-flex items-center gap-2 text-sm text-white/55 transition-colors duration-300 hover:text-signal"
-            >
-              Download sample
-              <ArrowRight className="size-3.5" aria-hidden />
-            </a>
+            <div className="mt-5 space-y-4">
+              <div className="flex items-start gap-2.5 text-sm text-white/65">
+                <span className="inline-flex size-8 shrink-0 items-center justify-center rounded-full bg-white/5 text-signal">
+                  <MapPin className="size-3.5" aria-hidden />
+                </span>
+                <span className="pt-1.5">Adyala Road, RWP</span>
+              </div>
+              <a
+                href="mailto:hello@freelancenexus.com"
+                className="inline-flex items-center gap-2.5 text-sm text-white/65 transition-colors duration-300 hover:text-signal"
+              >
+                <span className="inline-flex size-8 shrink-0 items-center justify-center rounded-full bg-white/5 text-signal">
+                  <Mail className="size-3.5" aria-hidden />
+                </span>
+                hello@freelancenexus.com
+              </a>
+            </div>
           </div>
         </div>
 
@@ -585,7 +590,6 @@ export function PageFrame({
       {hero}
       <main>{children}</main>
       <SiteFooter />
-      <BackToTop />
     </div>
   );
 }
@@ -595,6 +599,7 @@ export function InteriorHero({
   title,
   copy,
   accent,
+  align = "left",
   primaryCta = { href: "/contact", label: "Get a quote" },
   secondaryCta = { href: "/pricing", label: "View pricing" },
 }: {
@@ -602,9 +607,12 @@ export function InteriorHero({
   title: string;
   copy: string;
   accent?: ReactNode;
+  align?: "left" | "center";
   primaryCta?: { href: string; label: string };
   secondaryCta?: { href: string; label: string };
 }) {
+  const centered = align === "center";
+
   return (
     <section className="hero-plane relative overflow-x-hidden text-white">
       <SiteHeader dark />
@@ -615,39 +623,60 @@ export function InteriorHero({
             "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
         }}
       />
-      <div className="relative mx-auto grid min-h-[62svh] w-[90vw] max-w-[90vw] gap-10 pb-16 pt-28 sm:pb-20 lg:grid-cols-[1fr_0.85fr] lg:items-end">
-        <div className="max-w-2xl">
-          <p className="anim-rise inline-flex rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-white/70">
+      <div
+        className={`relative mx-auto flex min-h-[62svh] w-[90vw] max-w-[90vw] flex-col pb-16 pt-28 sm:pb-20 ${
+          centered
+            ? "items-center justify-center text-center"
+            : "justify-end gap-10 lg:grid lg:grid-cols-[1fr_0.85fr] lg:items-end"
+        }`}
+      >
+        <div className={centered ? "mx-auto max-w-3xl" : "max-w-2xl"}>
+          <p
+            className="eyebrow-pill eyebrow-pill--dark anim-rise"
+          >
             {eyebrow}
           </p>
           <h1 className="anim-rise anim-rise-delay-1 mt-5 font-display text-4xl font-bold tracking-tight sm:text-5xl md:text-[3.25rem] md:leading-[1.08]">
             {title}
           </h1>
-          <div className="accent-rule mt-5" />
-          <p className="anim-rise anim-rise-delay-2 mt-6 max-w-xl text-lg leading-relaxed text-white/65">
+          <div
+            className={`accent-rule mt-5 ${centered ? "mx-auto" : ""}`}
+          />
+          <p
+            className={`anim-rise anim-rise-delay-2 mt-6 text-lg leading-relaxed text-white/65 ${
+              centered ? "mx-auto max-w-2xl" : "max-w-xl"
+            }`}
+          >
             {copy}
           </p>
-          <div className="anim-rise anim-rise-delay-3 mt-8 flex flex-wrap gap-3">
+          <div
+            className={`anim-rise anim-rise-delay-3 mt-8 flex flex-wrap gap-3 ${
+              centered ? "justify-center" : ""
+            }`}
+          >
             <Link
               href={primaryCta.href}
-              className="group inline-flex items-center justify-center gap-2 rounded-full bg-signal px-6 py-3.5 text-sm font-semibold text-ink transition duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:bg-paper"
+              className="btn btn-solid btn-arrow-shift anim-rise anim-rise-delay-3"
             >
               {primaryCta.label}
-              <ArrowRight
-                className="size-4 transition group-hover:translate-x-1"
-                aria-hidden
-              />
+              <ArrowRight className="size-4" aria-hidden />
             </Link>
             <Link
               href={secondaryCta.href}
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white transition duration-500 hover:border-signal hover:bg-signal hover:text-ink"
+              className="btn btn-ghost-light anim-rise anim-rise-delay-3"
             >
               {secondaryCta.label}
             </Link>
           </div>
         </div>
         {accent ? (
-          <div className="anim-rise anim-rise-delay-4">{accent}</div>
+          <div
+            className={`anim-rise anim-rise-delay-4 ${
+              centered ? "mt-10 w-full max-w-md text-left" : ""
+            }`}
+          >
+            {accent}
+          </div>
         ) : null}
       </div>
     </section>
@@ -672,12 +701,12 @@ export function SectionHeading({
   return (
     <div className={centered ? "mx-auto w-full text-center" : "max-w-3xl"}>
       <p
-        className={`inline-flex items-center rounded-full border border-ink-soft/20 bg-ink-soft/10 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-ink-soft`}
+        className={`eyebrow-pill eyebrow-pill--light`}
       >
         {eyebrow}
       </p>
       <h2
-        className={`mt-5 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl md:text-[2.75rem] md:leading-[1.1] ${
+        className={`mt-5 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl ${
           centered ? "mx-auto" : ""
         } ${titleClassName}`}
       >
@@ -685,7 +714,7 @@ export function SectionHeading({
       </h2>
       {copy ? (
         <p
-          className={`mt-5 text-lg leading-relaxed text-mute ${
+          className={`type-body mt-5 text-lg ${
             centered ? "mx-auto max-w-2xl" : ""
           }`}
         >
@@ -739,32 +768,35 @@ export function ProofStrip({ dark = false }: { dark?: boolean }) {
 
 export function Testimonials() {
   return (
-    <div className="grid gap-6 md:grid-cols-3">
+    <div className="grid gap-5 md:grid-cols-3 lg:gap-6">
       {testimonials.map((item, index) => (
         <figure
           key={item.name}
-          className="group relative flex flex-col rounded-[18px] bg-paper p-7 shadow-[0_12px_36px_rgba(6,40,88,0.07)] ring-1 ring-[var(--line)] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5 hover:shadow-[0_22px_50px_rgba(6,40,88,0.14)] hover:ring-signal/45 sm:p-8"
+          className="group relative flex flex-col rounded-[18px] border border-[var(--line)] bg-paper p-7 transition-colors duration-300 hover:border-signal/50 hover:bg-mist/40 sm:p-8"
         >
           <div
-            className="absolute -inset-x-1.5 -top-1.5 bottom-3 -z-10 rounded-[18px] bg-[#a8c8d6]/30 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+            className="absolute inset-x-6 top-0 h-[2px] rounded-full bg-signal/0 transition-colors duration-300 group-hover:bg-signal"
             aria-hidden="true"
           />
+
           <div className="flex items-center justify-between gap-3">
-            <span className="inline-flex size-11 items-center justify-center rounded-full bg-mist text-ink-soft transition-all duration-500 group-hover:bg-signal group-hover:text-white">
-              <Quote className="size-5" aria-hidden />
+            <span className="inline-flex size-10 items-center justify-center rounded-full bg-mist text-signal transition-colors duration-300 group-hover:bg-ink group-hover:text-white">
+              <Quote className="size-4" aria-hidden />
             </span>
-            <span className="font-display text-xs font-bold tracking-[0.14em] text-mist-deep">
+            <span className="font-display text-xs font-bold tracking-[0.14em] text-signal">
               {String(index + 1).padStart(2, "0")}
             </span>
           </div>
-          <blockquote className="mt-6 flex-1 text-base leading-relaxed text-ink">
+
+          <blockquote className="type-body mt-6 flex-1 text-ink">
             “{item.quote}”
           </blockquote>
+
           <figcaption className="mt-7 border-t border-[var(--line)] pt-5">
-            <p className="font-display text-sm font-semibold text-ink">
+            <p className="font-display text-sm font-semibold tracking-tight text-ink">
               {item.name}
             </p>
-            <p className="mt-1 text-sm text-mute">{item.role}</p>
+            <p className="type-body-sm mt-1">{item.role}</p>
           </figcaption>
         </figure>
       ))}
@@ -798,13 +830,9 @@ export function FeatureCheck({
 
 export function StudioStory() {
   return (
-    <section className="relative overflow-hidden bg-paper py-24 sm:py-32">
+    <section className="relative overflow-hidden border-y border-[var(--line)] bg-paper py-24 sm:py-32">
       <div
-        className="pointer-events-none absolute -right-24 top-20 h-64 w-64 rounded-full bg-ink-soft/10 blur-3xl"
-        aria-hidden="true"
-      />
-      <div
-        className="pointer-events-none absolute -left-20 bottom-10 h-56 w-56 rounded-full bg-signal/10 blur-3xl"
+        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-signal/40 to-transparent"
         aria-hidden="true"
       />
       <div className="relative mx-auto grid w-[90vw] max-w-[90vw] gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-16">
@@ -817,38 +845,37 @@ export function StudioStory() {
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
               href="/about"
-              className="group inline-flex items-center justify-center gap-2 rounded-full bg-ink px-6 py-3 text-sm font-semibold text-paper transition duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:bg-ink-soft"
+              className="group inline-flex items-center justify-center gap-2 rounded-full bg-ink px-6 py-3 text-sm font-semibold text-paper transition-colors duration-300 hover:bg-ink-soft"
             >
               Our story
               <ArrowRight
-                className="size-4 transition group-hover:translate-x-1"
+                className="size-4 transition-transform duration-300 group-hover:translate-x-1"
                 aria-hidden
               />
             </Link>
-            <DownloadSampleLink className="inline-flex items-center gap-2 rounded-full border border-[var(--line)] bg-mist/40 px-6 py-3 text-sm font-medium text-ink transition duration-500 hover:border-signal hover:bg-signal" />
+            <DownloadSampleLink className="group inline-flex items-center gap-2 rounded-full border border-[var(--line)] bg-paper px-6 py-3 text-sm font-semibold text-ink transition-colors duration-300 hover:border-ink hover:bg-ink hover:text-paper" />
           </div>
         </div>
 
-        <ul className="space-y-4">
-          {studioStory.points.map((point, index) => (
-            <li
-              key={point}
-              className="group relative rounded-[18px] bg-paper px-6 py-6 shadow-[0_12px_36px_rgba(6,40,88,0.07)] ring-1 ring-[var(--line)] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:shadow-[0_22px_50px_rgba(6,40,88,0.14)] hover:ring-signal/45 sm:px-7"
-            >
-              <div
-                className="absolute -inset-x-1.5 -top-1.5 bottom-2.5 -z-10 rounded-[18px] bg-[#a8c8d6]/30 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-                aria-hidden="true"
-              />
-              <div className="flex items-start gap-4">
-                <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-full bg-mist font-display text-sm font-bold text-ink-soft transition-all duration-500 group-hover:bg-signal group-hover:text-white">
+        <ul className="overflow-hidden rounded-[20px] bg-paper shadow-[0_16px_48px_rgba(6,40,88,0.06)] ring-1 ring-[var(--line)]">
+          {studioStory.points.map((point, index) => {
+            const isLast = index === studioStory.points.length - 1;
+            return (
+              <li
+                key={point}
+                className={`group flex items-start gap-4 px-6 py-6 sm:px-7 sm:py-7 ${
+                  isLast ? "" : "border-b border-[var(--line)]"
+                }`}
+              >
+                <span className="font-display text-sm font-bold tracking-[0.14em] text-signal">
                   {String(index + 1).padStart(2, "0")}
                 </span>
-                <p className="pt-1.5 text-base leading-relaxed text-ink">
+                <p className="pt-0.5 text-[0.95rem] leading-relaxed text-ink sm:text-base">
                   {point}
                 </p>
-              </div>
-            </li>
-          ))}
+              </li>
+            );
+          })}
         </ul>
       </div>
     </section>
@@ -859,86 +886,66 @@ export function GuaranteeBand() {
   return (
     <section className="relative overflow-hidden bg-mist/35 py-24 sm:py-32">
       <div
-        className="pointer-events-none absolute -left-24 top-16 h-64 w-64 rounded-full bg-signal/10 blur-3xl"
-        aria-hidden="true"
-      />
-      <div
-        className="pointer-events-none absolute -right-20 bottom-10 h-56 w-56 rounded-full bg-ink-soft/10 blur-3xl"
+        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-signal/40 to-transparent"
         aria-hidden="true"
       />
       <div className="relative mx-auto w-[90vw] max-w-[90vw]">
-        <div className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr] lg:items-stretch lg:gap-6">
-          <div className="relative overflow-hidden rounded-[22px] bg-ink px-8 py-12 text-white shadow-[0_16px_48px_rgba(6,40,88,0.28)] sm:px-10 sm:py-14">
+        <div className="overflow-hidden rounded-[20px] bg-paper shadow-[0_16px_48px_rgba(6,40,88,0.08)] ring-1 ring-[var(--line)]">
+          <div className="relative overflow-hidden bg-ink px-8 py-12 text-center text-white sm:px-10 sm:py-14">
             <Image
               src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=1400&q=80"
               alt=""
               fill
-              sizes="(max-width: 1024px) 90vw, 40vw"
+              sizes="90vw"
               className="object-cover object-center"
               aria-hidden="true"
             />
             <div
-              className="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#062858]/92 via-[#062858]/88 to-[#047b7f]/75"
+              className="pointer-events-none absolute inset-0 bg-ink/88"
               aria-hidden="true"
             />
-            <div
-              className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-signal/20 blur-3xl"
-              aria-hidden="true"
-            />
-            <p className="relative inline-flex rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-[#9fd8da]">
-              Our promise
-            </p>
-            <h2 className="relative mt-5 font-display text-3xl font-bold tracking-tight sm:text-4xl">
-              Publish-ready transcripts.
-            </h2>
-            <div
-              className="relative mt-5 h-[3px] w-16 rounded-full bg-signal"
-              aria-hidden="true"
-            />
-            <p className="relative mt-5 text-base leading-relaxed text-white/65">
-              Human-reviewed before delivery. Typical turnaround is 24–72 hours
-              depending on length and complexity. If we miss the agreed brief, we
-              revise.
-            </p>
-            <Link
-              href="/contact"
-              className="group relative mt-8 inline-flex items-center justify-center gap-2 rounded-full bg-signal px-6 py-3 text-sm font-semibold text-ink transition duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:bg-paper"
-            >
-              Get a free quote
-              <ArrowRight
-                className="size-4 transition group-hover:translate-x-1"
-                aria-hidden
+            <div className="relative mx-auto max-w-2xl">
+              <p className="eyebrow-pill eyebrow-pill--dark mx-auto">
+                Our promise
+              </p>
+              <h2 className="mt-5 font-display text-3xl font-bold tracking-tight sm:text-4xl">
+                Publish-ready transcripts.
+              </h2>
+              <div
+                className="mx-auto mt-5 h-[3px] w-14 rounded-full bg-signal"
+                aria-hidden="true"
               />
-            </Link>
+              <p className="type-body mx-auto mt-5 max-w-md text-white/65">
+                Human-reviewed before delivery. Typical turnaround is 24–72 hours
+                depending on length and complexity. If we miss the agreed brief, we
+                revise.
+              </p>
+              <Link
+                href="/contact"
+                className="btn btn-solid btn-arrow-shift mt-8 px-6 py-3"
+              >
+                Get a free quote
+                <ArrowRight className="size-4" aria-hidden />
+              </Link>
+            </div>
           </div>
 
-          <ul className="grid gap-4">
+          <ul className="grid divide-y divide-[var(--line)] bg-paper sm:grid-cols-3 sm:divide-x sm:divide-y-0">
             {guarantees.map((item, index) => (
               <li
                 key={item.title}
-                className="group relative rounded-[18px] bg-paper px-6 py-6 shadow-[0_12px_36px_rgba(6,40,88,0.07)] ring-1 ring-[var(--line)] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:shadow-[0_22px_50px_rgba(6,40,88,0.14)] hover:ring-signal/45 sm:px-7 sm:py-7"
+                className="flex items-start gap-4 px-7 py-7 sm:px-8 sm:py-8"
               >
-                <div
-                  className="absolute -inset-x-1.5 -top-1.5 bottom-2.5 -z-10 rounded-[18px] bg-[#a8c8d6]/30 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-                  aria-hidden="true"
-                />
-                <div className="flex items-start gap-4">
-                  <span className="inline-flex size-11 shrink-0 items-center justify-center rounded-full bg-mist text-ink-soft transition-all duration-500 group-hover:bg-signal group-hover:text-white">
-                    <BadgeCheck className="size-5" aria-hidden />
-                  </span>
-                  <div className="min-w-0 flex-1">
-                    <div className="flex items-start justify-between gap-3">
-                      <h3 className="font-display text-xl font-semibold tracking-tight text-ink">
-                        {item.title}
-                      </h3>
-                      <span className="shrink-0 font-display text-xs font-bold tracking-[0.14em] text-mist-deep">
-                        {String(index + 1).padStart(2, "0")}
-                      </span>
-                    </div>
-                    <p className="mt-2 text-sm leading-relaxed text-mute">
-                      {item.copy}
-                    </p>
-                  </div>
+                <span className="font-display text-sm font-bold tracking-[0.14em] text-signal">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <div className="min-w-0 flex-1">
+                  <h3 className="font-display text-lg font-semibold tracking-tight text-ink sm:text-xl">
+                    {item.title}
+                  </h3>
+                  <p className="type-body-sm mt-2">
+                    {item.copy}
+                  </p>
                 </div>
               </li>
             ))}
@@ -978,32 +985,29 @@ export function CtaBand({
           />
 
           <div className="relative mx-auto max-w-3xl text-center">
-            <p className="inline-flex rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-[#9fd8da]">
+            <p className="eyebrow-pill eyebrow-pill--dark mx-auto">
               Next step
             </p>
-            <h2 className="mt-5 font-display text-3xl font-bold tracking-tight sm:text-4xl md:text-[2.85rem] md:leading-[1.1]">
+            <h2 className="mt-5 font-display text-3xl font-bold tracking-tight sm:text-4xl">
               {title}
             </h2>
             <div
               className="mx-auto mt-5 h-[3px] w-16 rounded-full bg-signal"
               aria-hidden="true"
             />
-            <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-white/65">
+            <p className="type-body mx-auto mt-5 max-w-2xl text-lg text-white/65">
               {copy}
             </p>
             <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
               <Link
                 href="/contact"
-                className="group inline-flex cursor-pointer items-center justify-center gap-2 rounded-full bg-signal px-7 py-3.5 text-sm font-semibold text-ink transition duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:bg-paper"
+                className="btn btn-solid btn-arrow-shift px-7 py-3.5"
               >
                 Request a quote
-                <ArrowRight
-                  className="size-4 transition group-hover:translate-x-1"
-                  aria-hidden
-                />
+                <ArrowRight className="size-4" aria-hidden />
               </Link>
               <DownloadSampleLink
-                className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-white/20 bg-white/5 px-7 py-3.5 text-sm font-semibold text-white transition duration-500 hover:border-signal hover:bg-signal hover:text-ink"
+                className="btn btn-ghost-light px-7 py-3.5"
                 label="Download a sample"
               />
             </div>

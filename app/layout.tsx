@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Figtree, Syne } from "next/font/google";
+import { BackToTop } from "./back-to-top";
 import "./globals.css";
 
 const figtree = Figtree({
@@ -52,7 +53,10 @@ export default function RootLayout({
       lang="en"
       className={`${figtree.variable} ${syne.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font-sans">{children}</body>
+      <body className="min-h-full flex flex-col font-sans">
+        {children}
+        <BackToTop />
+      </body>
     </html>
   );
 }

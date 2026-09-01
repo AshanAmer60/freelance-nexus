@@ -21,6 +21,7 @@ export default function ServicesPage() {
     <PageFrame
       hero={
         <InteriorHero
+          align="center"
           eyebrow="Services"
           title="Language solutions."
           copy="Transcription is our core. Translation and recording support complete the workflow when your project needs more than one step."
@@ -41,54 +42,63 @@ export default function ServicesPage() {
             copy="Every engagement is scoped to your audio quality, speakers, deadline, and how the final text will be used."
           />
 
-          <div className="mt-14 space-y-6">
+          <div className="mt-14 space-y-8 sm:space-y-10">
             {services.map((service, index) => {
               const Icon = service.icon;
               return (
                 <article
                   key={service.slug}
-                  className="group relative grid overflow-hidden rounded-[22px] bg-paper shadow-[0_16px_48px_rgba(6,40,88,0.1)] ring-1 ring-[var(--line)] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:shadow-[0_22px_50px_rgba(6,40,88,0.14)] hover:ring-signal/45 lg:grid-cols-2"
+                  className="group relative grid overflow-hidden rounded-[18px] border border-[var(--line)] bg-paper transition-colors duration-300 hover:border-signal/50 hover:bg-mist/30 lg:grid-cols-2"
                 >
+                  <div
+                    className="absolute inset-x-8 top-0 z-10 h-[2px] rounded-full bg-signal/0 transition-colors duration-300 group-hover:bg-signal"
+                    aria-hidden="true"
+                  />
+
                   <div className="relative min-h-[220px] overflow-hidden sm:min-h-[280px] lg:min-h-full">
                     <Image
                       src={service.image}
                       alt={service.imageAlt}
                       fill
                       sizes="(max-width: 1024px) 90vw, 45vw"
-                      className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]"
+                      className="object-cover"
                     />
                     <div
-                      className="absolute inset-0 bg-gradient-to-t from-ink/40 via-transparent to-transparent lg:bg-gradient-to-r lg:from-transparent lg:to-ink/10"
+                      className="absolute inset-0 bg-gradient-to-t from-ink/30 via-transparent to-transparent lg:bg-gradient-to-r lg:from-transparent lg:to-ink/5"
                       aria-hidden="true"
                     />
                   </div>
 
                   <div className="flex flex-col justify-center px-7 py-8 sm:px-10 sm:py-10">
                     <div className="flex items-center justify-between gap-3">
-                      <span className="inline-flex size-12 items-center justify-center rounded-full bg-mist text-ink-soft transition-all duration-500 group-hover:bg-signal group-hover:text-white">
+                      <span className="inline-flex size-11 items-center justify-center rounded-full bg-mist text-ink-soft transition-colors duration-300 group-hover:bg-ink group-hover:text-white">
                         <Icon className="size-5" aria-hidden />
                       </span>
-                      <span className="font-display text-xs font-bold tracking-[0.14em] text-mist-deep">
+                      <span className="font-display text-xs font-bold tracking-[0.14em] text-signal">
                         {String(index + 1).padStart(2, "0")}
                       </span>
                     </div>
 
-                    <h2 className="mt-6 font-display text-3xl font-semibold tracking-tight text-ink">
+                    <h2 className="mt-6 font-display text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
                       {service.title}
                     </h2>
-                    <p className="mt-4 text-base leading-relaxed text-mute sm:text-lg">
+                    <p className="type-body mt-4 sm:text-lg">
                       {service.summary}
                     </p>
-                    <p className="mt-3 text-sm leading-relaxed text-mute/90">
+                    <p className="type-body-sm mt-3">
                       {service.details}
                     </p>
 
-                    <ul className="mt-7 flex flex-wrap gap-2">
+                    <ul className="mt-7 space-y-2.5 border-t border-[var(--line)] pt-6">
                       {service.outcomes.map((item) => (
                         <li
                           key={item}
-                          className="rounded-full bg-mist px-3.5 py-1.5 text-xs font-semibold tracking-wide text-ink-soft transition-colors duration-500 group-hover:bg-signal/15 group-hover:text-ink"
+                          className="flex items-center gap-3 type-body-sm text-ink"
                         >
+                          <span
+                            className="size-1.5 shrink-0 rounded-full bg-signal"
+                            aria-hidden="true"
+                          />
                           {item}
                         </li>
                       ))}
@@ -96,7 +106,7 @@ export default function ServicesPage() {
 
                     <Link
                       href="/contact"
-                      className="mt-8 inline-flex cursor-pointer items-center gap-2 self-start rounded-full border border-[var(--line)] px-5 py-2.5 text-sm font-semibold text-ink transition-all duration-300 hover:border-signal hover:bg-signal hover:text-white"
+                      className="btn btn-solid btn-arrow-shift mt-8 self-start"
                     >
                       Request a quote
                       <ArrowRight className="size-4" aria-hidden />
@@ -108,17 +118,11 @@ export default function ServicesPage() {
           </div>
 
           <div className="mt-12 flex flex-wrap items-center justify-center gap-3">
-            <Link
-              href="/pricing"
-              className="inline-flex cursor-pointer items-center gap-2 rounded-full bg-ink px-6 py-3 text-sm font-semibold text-paper transition duration-500 hover:-translate-y-0.5 hover:bg-ink-soft"
-            >
+            <Link href="/pricing" className="btn btn-outline btn-arrow-shift">
               Compare pricing
               <ArrowRight className="size-4" aria-hidden />
             </Link>
-            <Link
-              href="/use-cases"
-              className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-[var(--line)] bg-paper px-6 py-3 text-sm font-semibold text-ink transition-all duration-300 hover:border-signal hover:bg-signal hover:text-white"
-            >
+            <Link href="/use-cases" className="btn btn-outline btn-arrow-shift">
               See use cases
               <ArrowRight className="size-4" aria-hidden />
             </Link>

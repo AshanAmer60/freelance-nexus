@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, PlayCircle } from "lucide-react";
 import { HeroCursor } from "./hero-cursor";
+import { PlatformLogo } from "./platform-logo";
 import { ServicesCarousel } from "./services-carousel";
 import {
   CtaBand,
@@ -9,11 +10,10 @@ import {
   PageFrame,
   SectionHeading,
   SiteHeader,
-  StudioStory,
   Testimonials,
   differentiators,
   faqs,
-  proofPoints,
+  platforms,
   services,
   steps,
   useCases,
@@ -72,11 +72,9 @@ function HomeHero() {
         <div className="relative z-10 mx-auto flex w-[90vw] max-w-[90vw] min-h-0 flex-1 flex-col justify-center py-6 sm:py-8 lg:py-10">
           <div className="grid min-h-0 items-center gap-6 lg:grid-cols-[1fr_1.1fr] lg:gap-10 xl:gap-12">
             <div className="order-2 lg:order-1">
-              <p className="anim-rise inline-flex items-center gap-2 rounded-full border border-[#7ec8cb]/25 bg-[#7ec8cb]/10 px-3.5 py-1.5 text-xs font-semibold tracking-wide text-[#9fd8da]">
+              <p className="eyebrow-pill eyebrow-pill--dark anim-rise">
                 Human-reviewed transcription studio
               </p>
-
-              
 
               <h1 className="anim-rise anim-rise-delay-1 mt-2 font-display text-[clamp(1.7rem,4.2vw,3.1rem)] font-bold leading-[1.1] tracking-tight text-white">
                 Professional{" "}
@@ -85,7 +83,7 @@ function HomeHero() {
                 <span className="text-[#7ec8cb]">Translation</span> Services
               </h1>
 
-              <p className="anim-rise anim-rise-delay-2 mt-4 max-w-xl text-[0.95rem] leading-relaxed text-white/70 sm:mt-5 sm:text-base lg:text-lg">
+              <p className="type-body anim-rise anim-rise-delay-2 mt-4 max-w-xl text-white/70 sm:mt-5 sm:text-base">
                 Bridging speech and usable text with precision. Our boutique team
                 delivers accurate, speaker-labeled transcripts—on time,
                 confidential, and ready to publish, cite, or share.
@@ -94,22 +92,17 @@ function HomeHero() {
               <div className="anim-rise anim-rise-delay-3 mt-6 flex flex-wrap items-center gap-4 sm:mt-8 sm:gap-5">
                 <Link
                   href="/contact"
-                  className="group inline-flex items-center justify-center gap-2 rounded-full bg-[#0a3d7a] px-7 py-3.5 text-sm font-semibold text-white transition duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:bg-[#0c4a94]"
+                  className="btn btn-solid btn-arrow-shift px-7 py-3.5"
                 >
                   Get Started
-                  <ArrowRight
-                    className="size-4 transition group-hover:translate-x-1"
-                    aria-hidden
-                  />
+                  <ArrowRight className="size-4" aria-hidden />
                 </Link>
                 <Link
                   href="/process"
-                  className="inline-flex items-center gap-3 text-sm font-medium text-white transition hover:text-[#9fd8da]"
+                  className="btn btn-ghost-light gap-3 px-5 py-3"
                 >
-                  <span className="inline-flex size-10 items-center justify-center rounded-full border border-white/35">
-                    <PlayCircle className="size-5 text-white" aria-hidden />
-                  </span>
-                  Watch How It Works
+                  <PlayCircle className="size-5 shrink-0" aria-hidden />
+                  Watch how it works
                 </Link>
               </div>
             </div>
@@ -118,16 +111,16 @@ function HomeHero() {
               <div className="group relative w-full max-w-[26rem] pt-5 pr-5 pl-3 sm:max-w-[32rem] sm:pt-6 sm:pr-6 sm:pl-4 md:max-w-[38rem] lg:max-w-none lg:w-[min(100%,42rem)] xl:w-[min(100%,48rem)]">
                 {/* Far back stacked card — slight left tilt */}
                 <div
-                  className="absolute top-0 right-3 bottom-5 left-2 -translate-x-2 -rotate-3 rounded-[18px] bg-[#a8c8d6]/30 transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform group-hover:-translate-x-4 group-hover:-rotate-5 sm:bottom-6 sm:left-3 sm:right-4 sm:-translate-x-3 sm:group-hover:-translate-x-5"
+                  className="hero-image-layer absolute top-0 right-3 bottom-5 left-2 -translate-x-2 -rotate-3 rounded-[18px] bg-[#a8c8d6]/30 group-hover:-translate-x-3 group-hover:-rotate-[3.5deg] sm:bottom-6 sm:left-3 sm:right-4 sm:-translate-x-3 sm:group-hover:-translate-x-3.5"
                   aria-hidden="true"
                 />
                 {/* Near back stacked card */}
                 <div
-                  className="absolute top-1 right-2 bottom-4 left-1 -translate-x-1.5 -rotate-1 rounded-[18px] bg-[#a8c8d6]/45 transition-transform duration-[1100ms] ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform group-hover:-translate-x-3 group-hover:-rotate-[2.5deg] sm:bottom-5 sm:left-2 sm:right-3 sm:-translate-x-2 sm:group-hover:-translate-x-3.5"
+                  className="hero-image-layer absolute top-1 right-2 bottom-4 left-1 -translate-x-1.5 -rotate-1 rounded-[18px] bg-[#a8c8d6]/45 group-hover:-translate-x-2 group-hover:-rotate-[1.5deg] sm:bottom-5 sm:left-2 sm:right-3 sm:-translate-x-2 sm:group-hover:-translate-x-2.5"
                   aria-hidden="true"
                 />
                 {/* Front image card */}
-                <div className="relative overflow-hidden rounded-[18px] shadow-[0_20px_55px_rgba(0,0,0,0.38)] transition-[transform,box-shadow] duration-[1000ms] ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform group-hover:-translate-y-1.5 group-hover:shadow-[0_28px_70px_rgba(0,0,0,0.48)]">
+                <div className="hero-image-layer relative overflow-hidden rounded-[18px] shadow-[0_20px_55px_rgba(0,0,0,0.38)] group-hover:-translate-y-0.5 group-hover:shadow-[0_26px_64px_rgba(0,0,0,0.42)]">
                   <Image
                     src="/heroteam.jpg"
                     alt="Team collaborating with laptops and headphones in a studio workspace"
@@ -135,7 +128,7 @@ function HomeHero() {
                     height={1200}
                     priority
                     sizes="(max-width: 1023px) 0px, 48vw"
-                    className="relative mx-auto block h-auto max-h-[36svh] w-full object-cover object-center transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform group-hover:scale-[1.035] sm:max-h-[44svh] lg:max-h-[min(62svh,36rem)]"
+                    className="hero-image-photo relative mx-auto block h-auto max-h-[36svh] w-full object-cover object-center group-hover:scale-[1.02] sm:max-h-[44svh] lg:max-h-[min(62svh,36rem)]"
                   />
                 </div>
               </div>
@@ -157,49 +150,40 @@ export default function Home() {
         />
         <div className="relative mx-auto w-[90vw] max-w-[90vw]">
           <div className="mx-auto max-w-2xl text-center">
-            <p className="inline-flex rounded-full border border-ink-soft/20 bg-ink-soft/10 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-ink-soft">
-              Delivery standards
+            <p className="eyebrow-pill eyebrow-pill--light">
+              Platforms
             </p>
-            <h2 className="mt-5 font-display text-2xl font-bold tracking-tight text-ink sm:text-3xl md:text-[2.15rem] md:leading-tight">
-              Clear. Confidential. On time.
+            <h2 className="mt-5 font-display text-2xl font-bold tracking-tight text-ink sm:text-3xl">
+              Platforms we work with.
             </h2>
-            <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-mute">
-              The essentials clients check before sending a file—scoped clearly,
-              reviewed carefully, delivered ready to use.
+            <p className="type-body mx-auto mt-4 max-w-xl">
+              Experienced across major transcription and annotation platforms—so
+              your projects move smoothly from brief to delivery.
             </p>
           </div>
 
-          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {proofPoints.map((item, index) => {
-              const Icon = item.icon;
-              return (
-                <article
-                  key={item.label}
-                  className="group relative rounded-[16px] bg-paper p-6 shadow-[0_10px_30px_rgba(6,40,88,0.06)] ring-1 ring-[var(--line)] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:shadow-[0_18px_40px_rgba(6,40,88,0.12)] hover:ring-signal/40 sm:p-7"
-                >
-                  <div
-                    className="absolute -inset-x-1 -top-1 bottom-2 -z-10 rounded-[16px] bg-[#a8c8d6]/25 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-                    aria-hidden="true"
-                  />
-                  <div className="flex items-center justify-between gap-3">
-                    <span className="inline-flex size-11 items-center justify-center rounded-full bg-mist text-ink-soft transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:bg-signal group-hover:text-white">
-                      <Icon className="size-5" aria-hidden />
-                    </span>
-                    <span className="font-display text-xs font-bold tracking-[0.14em] text-mist-deep">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                  </div>
-                  <p className="mt-6 font-display text-2xl font-bold leading-none tracking-tight text-ink sm:text-[1.75rem]">
-                    {item.value}
-                  </p>
-                  <p className="mt-3 text-xs font-semibold uppercase tracking-[0.16em] text-mute">
-                    {item.label}
-                  </p>
-                </article>
-              );
-            })}
+          <div className="mt-12 grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
+            {platforms.map((platform) => (
+              <article
+                key={platform.name}
+                className="group relative flex flex-col items-center overflow-hidden rounded-[18px] bg-mist/40 px-3 py-4 text-center ring-1 ring-[var(--line)] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-ink hover:ring-ink hover:shadow-[0_18px_40px_rgba(6,40,88,0.2)] sm:px-4 sm:py-5"
+              >
+                <span
+                  className="absolute inset-x-8 bottom-0 h-[3px] origin-center scale-x-0 rounded-full bg-signal transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100"
+                  aria-hidden="true"
+                />
+                <span className="inline-flex size-24 items-center justify-center rounded-full bg-paper p-3 shadow-[0_6px_18px_rgba(6,40,88,0.08)] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105 group-hover:shadow-[0_10px_24px_rgba(0,0,0,0.2)] sm:size-28 sm:p-3.5">
+                  <PlatformLogo name={platform.name} logo={platform.logo} />
+                </span>
+                <p className="mt-3 font-display text-base font-semibold tracking-tight text-ink transition-colors duration-500 group-hover:text-white">
+                  {platform.name}
+                </p>
+                <p className="type-body-sm mt-1 transition-colors duration-500 group-hover:text-white/60">
+                  {platform.focus}
+                </p>
+              </article>
+            ))}
           </div>
-          
         </div>
       </section>
 
@@ -243,51 +227,39 @@ export default function Home() {
             title="From recording to delivery"
             copy="Simple on the surface. Careful at every stage—so accuracy, confidentiality, and turnaround stay aligned."
           />
-          <div className="relative mt-14">
-            <div
-              className="pointer-events-none absolute top-[3.25rem] right-[8%] left-[8%] hidden h-px bg-gradient-to-r from-transparent via-signal/50 to-transparent lg:block"
-              aria-hidden="true"
-            />
-            <ol className="relative grid gap-6 md:grid-cols-2 lg:grid-cols-4 lg:gap-5">
-              {steps.map((step, index) => {
-                const Icon = step.icon;
-                return (
-                  <li
-                    key={step.num}
-                    className="group relative flex flex-col rounded-[20px] bg-paper p-7 shadow-[0_12px_36px_rgba(6,40,88,0.07)] ring-1 ring-[var(--line)] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5 hover:shadow-[0_22px_50px_rgba(6,40,88,0.14)] hover:ring-signal/45 sm:p-8"
-                  >
-                    <div
-                      className="absolute -inset-x-1.5 -top-1.5 bottom-3 -z-10 rounded-[20px] bg-[#a8c8d6]/30 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-                      aria-hidden="true"
-                    />
 
-                    <div className="relative flex items-center justify-between gap-3">
-                      <span className="relative z-10 inline-flex size-14 items-center justify-center rounded-full bg-mist font-display text-lg font-bold tracking-wide text-ink-soft ring-4 ring-paper transition-all duration-500 group-hover:bg-signal group-hover:text-white">
-                        {step.num}
-                      </span>
-                      <span className="inline-flex size-10 items-center justify-center rounded-full bg-mist/80 text-ink-soft transition-all duration-500 group-hover:bg-ink group-hover:text-white">
-                        <Icon className="size-4" aria-hidden />
-                      </span>
-                    </div>
+          <ol className="relative mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+            {steps.map((step) => {
+              const Icon = step.icon;
+              return (
+                <li
+                  key={step.num}
+                  className="group relative flex flex-col rounded-[18px] border border-[var(--line)] bg-paper p-7 transition-colors duration-300 hover:border-signal/50 hover:bg-mist/40 sm:p-8"
+                >
+                  <div
+                    className="absolute inset-x-6 top-0 h-[2px] rounded-full bg-signal/0 transition-colors duration-300 group-hover:bg-signal"
+                    aria-hidden="true"
+                  />
 
-                    {index < steps.length - 1 ? (
-                      <span
-                        className="absolute top-[3.4rem] -right-3 z-20 hidden size-2.5 rounded-full bg-signal lg:block"
-                        aria-hidden="true"
-                      />
-                    ) : null}
+                  <div className="flex items-center justify-between gap-3">
+                    <span className="font-display text-sm font-bold tracking-[0.14em] text-signal">
+                      {step.num}
+                    </span>
+                    <span className="inline-flex size-9 items-center justify-center rounded-full bg-mist text-ink-soft transition-colors duration-300 group-hover:bg-ink group-hover:text-white">
+                      <Icon className="size-4" aria-hidden />
+                    </span>
+                  </div>
 
-                    <h3 className="mt-7 font-display text-xl font-semibold tracking-tight text-ink">
-                      {step.title}
-                    </h3>
-                    <p className="mt-3 text-sm leading-relaxed text-mute">
-                      {step.copy}
-                    </p>
-                  </li>
-                );
-              })}
-            </ol>
-          </div>
+                  <h3 className="mt-7 font-display text-lg font-semibold tracking-tight text-ink sm:text-xl">
+                    {step.title}
+                  </h3>
+                  <p className="type-body-sm mt-3">
+                    {step.copy}
+                  </p>
+                </li>
+              );
+            })}
+          </ol>
         </div>
       </section>
 
@@ -309,22 +281,25 @@ export default function Home() {
           }}
         />
 
-        <div className="relative mx-auto grid w-[90vw] max-w-[90vw] gap-12 py-20 sm:py-28 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-16">
-          <div>
-            <p className="inline-flex rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-[#9fd8da]">
+        <div className="relative mx-auto w-[90vw] max-w-[90vw] py-20 sm:py-28">
+          <div className="mx-auto max-w-2xl text-center">
+            <p className="eyebrow-pill eyebrow-pill--dark">
               What sets us apart
             </p>
-            <h2 className="mt-5 font-display text-3xl font-bold tracking-tight sm:text-4xl md:text-[2.75rem] md:leading-[1.1]">
+            <h2 className="mt-5 font-display text-3xl font-bold tracking-tight sm:text-4xl">
               Precision over volume.
             </h2>
-            <div className="mt-5 h-[3px] w-16 rounded-full bg-signal" aria-hidden="true" />
-            <p className="mt-6 max-w-md text-lg leading-relaxed text-white/65">
+            <div
+              className="mx-auto mt-5 h-[3px] w-16 rounded-full bg-signal"
+              aria-hidden="true"
+            />
+            <p className="type-body mx-auto mt-6 max-w-md text-lg text-white/65">
               Large platforms optimize for throughput. We optimize for the
               transcript you actually open—accurate, organized, and confidential.
             </p>
           </div>
 
-          <ul className="divide-y divide-white/10 border-y border-white/10">
+          <ul className="mx-auto mt-14 max-w-3xl divide-y divide-white/10 border-y border-white/10">
             {differentiators.map((item, index) => {
               const Icon = item.icon;
               return (
@@ -342,7 +317,7 @@ export default function Home() {
                     <h3 className="font-display text-xl font-semibold tracking-tight text-white sm:text-2xl">
                       {item.title}
                     </h3>
-                    <p className="mt-2 text-sm leading-relaxed text-white/60 sm:text-base">
+                    <p className="type-body-sm mt-2 text-white/60 sm:text-base">
                       {item.copy}
                     </p>
                   </div>
@@ -369,51 +344,54 @@ export default function Home() {
             title="Built for the work."
             copy="From depositions to podcasts, we shape transcripts around how your team will use them next."
           />
+
           <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
             {useCases.map((item, index) => {
               const Icon = item.icon;
               return (
                 <article
                   key={item.title}
-                  className="group relative flex flex-col rounded-[18px] bg-paper p-6 shadow-[0_12px_36px_rgba(6,40,88,0.07)] ring-1 ring-[var(--line)] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5 hover:shadow-[0_22px_50px_rgba(6,40,88,0.14)] hover:ring-signal/45 sm:p-7"
+                  className="group relative flex flex-col rounded-[18px] border border-[var(--line)] bg-paper p-6 transition-colors duration-300 hover:border-signal/50 hover:bg-mist/40 sm:p-7"
                 >
                   <div
-                    className="absolute -inset-x-1.5 -top-1.5 bottom-3 -z-10 rounded-[18px] bg-[#a8c8d6]/30 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                    className="absolute inset-x-6 top-0 h-[2px] rounded-full bg-signal/0 transition-colors duration-300 group-hover:bg-signal"
                     aria-hidden="true"
                   />
 
                   <div className="flex items-center justify-between gap-3">
-                    <span className="inline-flex size-12 items-center justify-center rounded-full bg-mist text-ink-soft transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:bg-signal group-hover:text-white">
-                      <Icon className="size-5" aria-hidden />
-                    </span>
-                    <span className="font-display text-xs font-bold tracking-[0.14em] text-mist-deep">
+                    <span className="font-display text-sm font-bold tracking-[0.14em] text-signal">
                       {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <span className="inline-flex size-12 items-center justify-center rounded-full bg-mist text-ink transition-colors duration-300 group-hover:bg-ink group-hover:text-white">
+                      <Icon className="size-5" aria-hidden />
                     </span>
                   </div>
 
-                  <h3 className="mt-5 font-display text-xl font-semibold tracking-tight text-ink">
+                  <h3 className="mt-6 font-display text-lg font-semibold tracking-tight text-ink sm:text-xl">
                     {item.title}
                   </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-mute">
+                  <p className="type-body-sm mt-3">
                     {item.copy}
                   </p>
                 </article>
               );
             })}
           </div>
+
           <div className="mt-10 text-center">
             <Link
               href="/use-cases"
-              className="inline-flex items-center gap-2 rounded-full border border-[var(--line)] bg-paper px-5 py-2.5 text-sm font-semibold text-ink transition-all duration-300 hover:border-signal hover:bg-signal hover:text-white"
+              className="btn btn-outline btn-arrow-shift"
             >
               Browse industry use cases
-              <ArrowRight className="size-4" aria-hidden />
+              <ArrowRight
+                className="size-4 transition-transform duration-300 group-hover:translate-x-1"
+                aria-hidden
+              />
             </Link>
           </div>
         </div>
       </section>
-
-      <StudioStory />
 
       <GuaranteeBand />
 
@@ -457,22 +435,26 @@ export default function Home() {
             {faqs.slice(0, 5).map((item, index) => (
               <details
                 key={item.q}
-                className="group rounded-[18px] bg-paper px-6 py-2 shadow-[0_12px_36px_rgba(6,40,88,0.06)] ring-1 ring-[var(--line)] transition-all duration-300 open:shadow-[0_18px_44px_rgba(6,40,88,0.1)] open:ring-signal/40 sm:px-7"
+                className="group relative rounded-[18px] border border-[var(--line)] bg-paper px-6 py-1 transition-colors duration-300 open:border-signal/50 open:bg-mist/40 hover:border-signal/40 sm:px-7"
               >
-                <summary className="cursor-pointer py-5 font-display text-lg font-semibold text-ink">
+                <div
+                  className="absolute inset-x-6 top-0 h-[2px] rounded-full bg-signal/0 transition-colors duration-300 group-open:bg-signal"
+                  aria-hidden="true"
+                />
+                <summary className="cursor-pointer list-none py-5 font-display text-lg font-semibold text-ink [&::-webkit-details-marker]:hidden">
                   <span className="flex items-center justify-between gap-4">
                     <span className="flex min-w-0 items-center gap-4">
-                      <span className="hidden shrink-0 font-display text-xs font-bold tracking-[0.14em] text-mist-deep sm:inline">
+                      <span className="hidden shrink-0 font-display text-xs font-bold tracking-[0.14em] text-signal sm:inline">
                         {String(index + 1).padStart(2, "0")}
                       </span>
                       <span className="min-w-0">{item.q}</span>
                     </span>
-                    <span className="inline-flex size-9 shrink-0 items-center justify-center rounded-full bg-mist text-lg leading-none text-ink-soft transition-all duration-300 group-open:rotate-45 group-open:bg-signal group-open:text-white">
+                    <span className="inline-flex size-9 shrink-0 items-center justify-center rounded-full bg-mist text-lg leading-none text-ink-soft transition-all duration-300 group-open:rotate-45 group-open:bg-ink group-open:text-white">
                       +
                     </span>
                   </span>
                 </summary>
-                <p className="border-t border-[var(--line)] pb-5 pt-4 text-base leading-relaxed text-mute sm:pl-12">
+                <p className="type-body border-t border-[var(--line)] pb-5 pt-4 sm:pl-12">
                   {item.a}
                 </p>
               </details>
@@ -481,7 +463,7 @@ export default function Home() {
           <div className="mt-10 text-center">
             <Link
               href="/faq"
-              className="inline-flex items-center gap-2 rounded-full border border-[var(--line)] bg-paper px-5 py-2.5 text-sm font-semibold text-ink transition-all duration-300 hover:border-signal hover:bg-signal hover:text-white"
+              className="btn btn-outline btn-arrow-shift"
             >
               Read all FAQs
               <ArrowRight className="size-4" aria-hidden />

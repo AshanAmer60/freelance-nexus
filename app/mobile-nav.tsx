@@ -1,12 +1,14 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ArrowRight, Menu, X } from "lucide-react";
 import { SiteLogo, navLinks } from "./brand";
 
 export function MobileNav({ dark = false }: { dark?: boolean }) {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     if (!open) return;
@@ -89,22 +91,31 @@ export function MobileNav({ dark = false }: { dark?: boolean }) {
         </div>
 
         <nav className="flex flex-1 flex-col gap-1 overflow-y-auto bg-[#fdfdfd] px-3 py-6">
-          {navLinks.map((link, index) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              onClick={() => setOpen(false)}
-              className="flex items-center justify-between px-3 py-3.5 font-display text-lg font-semibold text-ink transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:bg-mist hover:text-ink-soft"
-              style={{
-                transitionDelay: open ? `${index * 40}ms` : "0ms",
-                opacity: open ? 1 : 0,
-                transform: open ? "translateX(0)" : "translateX(12px)",
-              }}
-            >
-              {link.label}
-              <ArrowRight className="size-4 text-signal" aria-hidden />
-            </Link>
-          ))}
+          {navLinks.map((link, index) => {
+            const isActive =
+              pathname === link.href || pathname.startsWith(`${link.href}/`);
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setOpen(false)}
+                className={`flex items-center justify-between px-3 py-3.5 font-display text-lg font-semibold transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                  isActive
+                    ? "bg-mist text-ink"
+                    : "text-ink hover:bg-mist hover:text-ink-soft"
+                }`}
+                aria-current={isActive ? "page" : undefined}
+                style={{
+                  transitionDelay: open ? `${index * 40}ms` : "0ms",
+                  opacity: open ? 1 : 0,
+                  transform: open ? "translateX(0)" : "translateX(12px)",
+                }}
+              >
+                {link.label}
+                <ArrowRight className="size-4 text-signal" aria-hidden />
+              </Link>
+            );
+          })}
           <Link
             href="/about"
             onClick={() => setOpen(false)}
@@ -119,7 +130,7 @@ export function MobileNav({ dark = false }: { dark?: boolean }) {
           <Link
             href="/contact"
             onClick={() => setOpen(false)}
-            className="btn-primary w-full px-5 py-3.5 text-sm"
+            className="btn btn-solid w-full px-5 py-3.5"
           >
             Get a quote
             <ArrowRight className="btn-arrow size-4" aria-hidden />

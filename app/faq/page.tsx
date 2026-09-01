@@ -18,6 +18,7 @@ export default function FaqPage() {
     <PageFrame
       hero={
         <InteriorHero
+          align="center"
           eyebrow="FAQ"
           title="Straight answers."
           copy="Accuracy, timelines, formats, confidentiality, and delivery options—explained without the runaround."

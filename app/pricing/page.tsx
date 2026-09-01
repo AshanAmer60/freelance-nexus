@@ -3,7 +3,6 @@ import Link from "next/link";
 import { ArrowRight, Check } from "lucide-react";
 import {
   CtaBand,
-  FeatureCheck,
   InteriorHero,
   PageFrame,
   SectionHeading,
@@ -22,24 +21,12 @@ export default function PricingPage() {
     <PageFrame
       hero={
         <InteriorHero
+          align="center"
           eyebrow="Pricing"
           title="Clear rates."
           copy="Start with per-minute guidance, then we refine your quote based on speakers, audio quality, turnaround, and add-ons like timestamps or verbatim."
           primaryCta={{ href: "/contact", label: "Request a quote" }}
           secondaryCta={{ href: "/sample", label: "See sample output" }}
-          accent={
-            <div className="rounded-[20px] border border-white/10 bg-white/[0.04] p-7 shadow-[0_16px_40px_rgba(0,0,0,0.2)] backdrop-blur-sm">
-              <p className="inline-flex rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-[#9fd8da]">
-                What affects price
-              </p>
-              <ul className="mt-5 space-y-3 text-sm text-white/75">
-                <FeatureCheck light>Audio clarity and accents</FeatureCheck>
-                <FeatureCheck light>Number of speakers</FeatureCheck>
-                <FeatureCheck light>Verbatim vs clean-read</FeatureCheck>
-                <FeatureCheck light>Timestamps and rush delivery</FeatureCheck>
-              </ul>
-            </div>
-          }
         />
       }
     >
@@ -51,17 +38,17 @@ export default function PricingPage() {
               return (
                 <article
                   key={item.label}
-                  className="group relative rounded-[16px] bg-paper p-6 shadow-[0_10px_30px_rgba(6,40,88,0.06)] ring-1 ring-[var(--line)] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:shadow-[0_18px_40px_rgba(6,40,88,0.12)] hover:ring-signal/40"
+                  className="group relative rounded-[18px] border border-[var(--line)] bg-paper p-6 transition-colors duration-300 hover:border-signal/50 hover:bg-mist/40"
                 >
                   <div
-                    className="absolute -inset-x-1 -top-1 bottom-2 -z-10 rounded-[16px] bg-[#a8c8d6]/25 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                    className="absolute inset-x-5 top-0 h-[2px] rounded-full bg-signal/0 transition-colors duration-300 group-hover:bg-signal"
                     aria-hidden="true"
                   />
                   <div className="flex items-center justify-between gap-3">
-                    <span className="inline-flex size-11 items-center justify-center rounded-full bg-mist text-ink-soft transition-all duration-500 group-hover:bg-signal group-hover:text-white">
-                      <Icon className="size-5" aria-hidden />
+                    <span className="inline-flex size-10 items-center justify-center rounded-full bg-mist text-ink-soft transition-colors duration-300 group-hover:bg-ink group-hover:text-white">
+                      <Icon className="size-4" aria-hidden />
                     </span>
-                    <span className="font-display text-xs font-bold tracking-[0.14em] text-mist-deep">
+                    <span className="font-display text-xs font-bold tracking-[0.14em] text-signal">
                       {String(index + 1).padStart(2, "0")}
                     </span>
                   </div>
@@ -80,11 +67,7 @@ export default function PricingPage() {
 
       <section className="relative overflow-hidden bg-mist/35 py-24 sm:py-32">
         <div
-          className="pointer-events-none absolute -left-20 top-16 h-56 w-56 rounded-full bg-signal/10 blur-3xl"
-          aria-hidden="true"
-        />
-        <div
-          className="pointer-events-none absolute -right-24 bottom-10 h-64 w-64 rounded-full bg-ink-soft/10 blur-3xl"
+          className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-signal/40 to-transparent"
           aria-hidden="true"
         />
         <div className="relative mx-auto w-[90vw] max-w-[90vw]">
@@ -95,22 +78,24 @@ export default function PricingPage() {
             copy="Final quotes are confirmed after we review a sample of your audio when helpful."
           />
 
-          <div className="mt-14 grid gap-6 lg:grid-cols-3">
+          <div className="mt-14 grid gap-5 lg:grid-cols-3 lg:gap-6">
             {pricingPlans.map((plan, index) => (
               <article
                 key={plan.name}
-                className={`group relative flex flex-col rounded-[22px] p-7 shadow-[0_16px_48px_rgba(6,40,88,0.1)] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5 sm:p-8 ${
+                className={`group relative flex flex-col rounded-[18px] border p-7 transition-colors duration-300 sm:p-8 ${
                   plan.featured
-                    ? "bg-ink text-white shadow-[0_22px_60px_rgba(6,40,88,0.28)] ring-1 ring-signal/40"
-                    : "bg-paper ring-1 ring-[var(--line)] hover:shadow-[0_22px_50px_rgba(6,40,88,0.14)] hover:ring-signal/45"
+                    ? "border-signal/40 bg-ink text-white hover:border-signal"
+                    : "border-[var(--line)] bg-paper hover:border-signal/50 hover:bg-mist/40"
                 }`}
               >
-                {!plan.featured ? (
-                  <div
-                    className="absolute -inset-x-1.5 -top-1.5 bottom-3 -z-10 rounded-[22px] bg-[#a8c8d6]/30 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-                    aria-hidden="true"
-                  />
-                ) : null}
+                <div
+                  className={`absolute inset-x-6 top-0 h-[2px] rounded-full transition-colors duration-300 ${
+                    plan.featured
+                      ? "bg-signal"
+                      : "bg-signal/0 group-hover:bg-signal"
+                  }`}
+                  aria-hidden="true"
+                />
 
                 <div className="flex items-center justify-between gap-3">
                   <span
@@ -124,7 +109,7 @@ export default function PricingPage() {
                   </span>
                   <span
                     className={`font-display text-xs font-bold tracking-[0.14em] ${
-                      plan.featured ? "text-white/30" : "text-mist-deep"
+                      plan.featured ? "text-signal" : "text-signal"
                     }`}
                   >
                     {String(index + 1).padStart(2, "0")}
@@ -132,7 +117,7 @@ export default function PricingPage() {
                 </div>
 
                 <h2
-                  className={`mt-5 font-display text-3xl font-semibold tracking-tight ${
+                  className={`mt-5 font-display text-2xl font-semibold tracking-tight sm:text-3xl ${
                     plan.featured ? "text-white" : "text-ink"
                   }`}
                 >
@@ -140,7 +125,7 @@ export default function PricingPage() {
                 </h2>
                 <p
                   className={`mt-4 font-display text-4xl font-bold tracking-tight ${
-                    plan.featured ? "text-signal" : "text-ink-soft"
+                    plan.featured ? "text-signal" : "text-ink"
                   }`}
                 >
                   {plan.rate}
@@ -160,7 +145,11 @@ export default function PricingPage() {
                   {plan.blurb}
                 </p>
 
-                <ul className="mt-8 flex-1 space-y-3">
+                <ul
+                  className={`mt-8 flex-1 space-y-3 border-t pt-6 ${
+                    plan.featured ? "border-white/10" : "border-[var(--line)]"
+                  }`}
+                >
                   {plan.features.map((feature) => (
                     <li
                       key={feature}
@@ -184,14 +173,17 @@ export default function PricingPage() {
 
                 <Link
                   href="/contact"
-                  className={`mt-8 inline-flex cursor-pointer items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 ${
+                  className={`group/link mt-8 inline-flex cursor-pointer items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition-colors duration-300 ${
                     plan.featured
                       ? "bg-signal text-ink hover:bg-paper"
                       : "bg-ink text-paper hover:bg-ink-soft"
                   }`}
                 >
                   Get this quote
-                  <ArrowRight className="size-4" aria-hidden />
+                  <ArrowRight
+                    className="size-4 transition-transform duration-300 group-hover/link:translate-x-1"
+                    aria-hidden
+                  />
                 </Link>
               </article>
             ))}
