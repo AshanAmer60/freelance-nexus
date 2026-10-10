@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Figtree, Syne } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import { BackToTop } from "./back-to-top";
 import "./globals.css";
 
@@ -56,6 +57,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col font-sans">
         {children}
         <BackToTop />
+        <Analytics />
       </body>
     </html>
   );
